@@ -10,10 +10,14 @@ public class PlayerController : MonoBehaviour {
 
     public bool isDead = false;
     public float movementSpeed = 6f;
-    public float jumpForce;
+    public float jumpForce = 5f;
+
+    // NOTE: This works for flat pieces of ground but will not work for slopes. -Dean
     public bool IsGrounded {
         get {
-            return Physics.Raycast(transform.position, -Vector2.up, GetComponent<BoxCollider2D>().bounds.extents.y + 0.1f);
+            if (Rigidbody.velocity.y == 0)
+                return true;
+            return false;
         }
     }
 
@@ -41,12 +45,6 @@ public class PlayerController : MonoBehaviour {
             Jump();
             Debug.Log("Jump");
         }
-
-
-        if (IsGrounded) {
-            Debug.Log("Player Grounded");
-        }
-	
 	}
 
     void Move(Direction direction) {
@@ -60,6 +58,8 @@ public class PlayerController : MonoBehaviour {
     }
 
     void Jump() {
-        Rigidbody.velocity = new Vector2(0, jumpForce);
+        if (IsGrounded) {
+            Rigidbody.velocity = new Vector2(0, jumpForce);
+        }
     }
 }
