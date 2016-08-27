@@ -8,8 +8,12 @@ public enum Direction {
 
 public class PlayerController : MonoBehaviour {
 
+    public GameObject head;
+    public GameObject body;
     public GameObject leftArm;
     public GameObject rightArm;
+    public GameObject leftLeg;
+    public GameObject rightLeg;
 
     public Rigidbody2D Rigidbody {
         get {
@@ -26,10 +30,14 @@ public class PlayerController : MonoBehaviour {
     public float attackDelay = 1f;
     float attackTimeout = 0f;
 
-    Vector3 leftBackArmRestPosition = new Vector3(0.5f, 1, 0);
-    Vector3 leftFrontArmRestPosition = new Vector3(0.5f, 0.75f, 0);
-    Vector3 rightBackArmRestPosition = new Vector3(-0.5f, 1, 0);
-    Vector3 rightFrontArmRestPosition = new Vector3(-0.5f, 0.75f, 0);
+    Vector3 headLeftRestPosition = new Vector3(-0.15f, 0.9f, 0);
+    Vector3 headRightRestPosition = new Vector3(0.15f, 0.9f, 0);
+    Vector3 leftBackArmRestPosition = new Vector3(0.45f, 0, 0);
+    Vector3 leftFrontArmRestPosition = new Vector3(0.45f, -0.2f, 0);
+    Vector3 rightBackArmRestPosition = new Vector3(-0.45f, 0, 0);
+    Vector3 rightFrontArmRestPosition = new Vector3(-0.45f, -0.2f, 0);
+    Vector3 frontLegRestPosition = new Vector3(0.4f, -0.8f, 0);
+    Vector3 backLegRestPosition = new Vector3(-0.3f, -0.8f, 0);
 
     // Returns whether the player is on the ground.
     // NOTE: This works for flat pieces of ground but will not work for slopes. -Dean
@@ -56,7 +64,7 @@ public class PlayerController : MonoBehaviour {
 
     // Use this for initialization.
     void Start() {
-        ResetLimbPositions();
+        ResetBodyPartPositions();
     }
 
     // Update is called once per frame.
@@ -103,7 +111,7 @@ public class PlayerController : MonoBehaviour {
             attackTimeout -= Time.deltaTime;
 
             if (attackTimeout <= 0f) {
-                ResetLimbPositions();
+                ResetBodyPartPositions();
                 leftArm.GetComponent<CircleCollider2D>().enabled = false;
                 rightArm.GetComponent<CircleCollider2D>().enabled = false;
                 attackTimeout = 0;
@@ -160,6 +168,7 @@ public class PlayerController : MonoBehaviour {
         if (!IsAttacking) {
             float d = 1;
 
+            // TODO: Implement actual attacks with smooth animations. -Dean
             switch (direction) {
                 case Direction.Left:
                     leftArm.GetComponent<CircleCollider2D>().enabled = true;
@@ -186,30 +195,46 @@ public class PlayerController : MonoBehaviour {
         if(Input.GetKeyDown(KeyCode.A)) {
             directionFacing = Direction.Left;
 
-            ResetLimbPositions();
+            ResetBodyPartPositions();
         }
         if (Input.GetKeyDown(KeyCode.D)) {
             directionFacing = Direction.Right;
 
-            ResetLimbPositions();
+            ResetBodyPartPositions();
         }
     }
 
-    void ResetLimbPositions() {
+    void ResetBodyPartPositions() {
         switch (directionFacing) {
             case Direction.Left:
+                // Head
+                head.transform.localPosition = headLeftRestPosition;
+                
+                // Arms
                 leftArm.transform.localPosition = leftFrontArmRestPosition;
                 rightArm.transform.localPosition = rightBackArmRestPosition;
 
                 leftArm.GetComponent<SpriteRenderer>().sortingOrder = 2;
                 rightArm.GetComponent<SpriteRenderer>().sortingOrder = 0;
+
+                // Legs
+                rightLeg.transform.localPosition = frontLegRestPosition;
+                leftLeg.transform.localPosition = backLegRestPosition;
                 break;
             case Direction.Right:
+                // Head
+                head.transform.localPosition = headRightRestPosition;
+
+                // Arms
                 rightArm.transform.localPosition = rightFrontArmRestPosition;
                 leftArm.transform.localPosition = leftBackArmRestPosition;
 
                 leftArm.GetComponent<SpriteRenderer>().sortingOrder = 0;
                 rightArm.GetComponent<SpriteRenderer>().sortingOrder = 2;
+
+                // Legs
+                leftLeg.transform.localPosition = frontLegRestPosition;
+                rightLeg.transform.localPosition = backLegRestPosition;
                 break;
         }
     }
