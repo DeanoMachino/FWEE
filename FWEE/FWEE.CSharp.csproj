@@ -13,11 +13,13 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile></CompilerResponseFile>
+    <CompilerResponseFile>
+    </CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
     <UnityVersion>5.4.0f3</UnityVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
     <LangVersion Condition=" '$(VisualStudioVersion)' != '10.0' ">4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -64,7 +66,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Source\GameManager.cs" />
+    <Compile Include="Assets\Source\LevelGeneration\Block.cs" />
+    <Compile Include="Assets\Source\LevelGeneration\Level.cs" />
+    <Compile Include="Assets\Source\LevelGeneration\LevelGenerator.cs" />
+    <Compile Include="Assets\Source\LevelGeneration\Section.cs" />
     <Compile Include="Assets\Source\Player\PlayerController.cs" />
+    <Compile Include="Assets\Source\Utilities\Vector2i.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2013\UnityVS.CSharp.targets" />
 </Project>
