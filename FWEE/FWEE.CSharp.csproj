@@ -66,11 +66,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Source\GameManager.cs" />
-    <Compile Include="Assets\Source\LevelGeneration\Block.cs" />
+    <Compile Include="Assets\Source\LevelGeneration\Chunk.cs" />
     <Compile Include="Assets\Source\LevelGeneration\Level.cs" />
     <Compile Include="Assets\Source\LevelGeneration\LevelGenerator.cs" />
-    <Compile Include="Assets\Source\LevelGeneration\Section.cs" />
     <Compile Include="Assets\Source\Player\PlayerController.cs" />
+    <Compile Include="Assets\Source\Utilities\Flag.cs" />
     <Compile Include="Assets\Source\Utilities\Vector2i.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2013\UnityVS.CSharp.targets" />

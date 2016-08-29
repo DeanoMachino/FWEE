@@ -872,9 +872,8 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 4000010974728392}
-  - 114: {fileID: 114000011980723342}
   m_Layer: 0
-  m_Name: Block01
+  m_Name: FilledChunk
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3152,19 +3151,6 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
---- !u!114 &114000011980723342
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000013164494968}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8fe2ac059fb2ef34c8ac8eba1d071148, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attributes: 
-  type: 0
 --- !u!212 &212000010010543430
 SpriteRenderer:
   m_ObjectHideFlags: 1

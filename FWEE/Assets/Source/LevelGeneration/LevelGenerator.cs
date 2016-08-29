@@ -1,14 +1,37 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+enum Direction {
+    Left,
+    Right,
+    Up,
+    Down
+}
+
 public class LevelGenerator : MonoBehaviour {
 
-    public Level gameLevel = new Level();
+    public Level level = new Level();
 
-    public Block[] standardBlocks;
+    /*public Block[] standardBlocks;
     public Block[] playerStartBlocks;
     public Block[] fountainBlocks;
-    public Block[] spawnerBlocks;
+    public Block[] spawnerBlocks;*/
+
+    public GameObject LeftChunk;
+    public GameObject RightChunk;
+    public GameObject DownChunk;
+    public GameObject LeftRightChunk;
+    public GameObject LeftDownChunk;
+    public GameObject RightDownChunk;
+    public GameObject LeftRightDownChunk;
+    public GameObject NonPathChunk;
+    public GameObject StartChunk;
+    public GameObject EndChunk;
+
+    Vector2i startChunk;
+    Vector2i currentChunk;
+    Direction previousMove;
+    bool endReached = false;
 
 	// Use this for initialization
 	void Start () {
@@ -17,57 +40,151 @@ public class LevelGenerator : MonoBehaviour {
 
     public Level GenerateLevel() {
 
-        SetUpArrays();
+        SetUpArray();
 
         InitialiseStartingBlock();
 
-        
-        return gameLevel;
-    }
+        // Loops several times to add extra/overlapping routes.
+        for (int i = 0; i < 3; i++) {
+            currentChunk = startChunk;
+            endReached = false;
 
-    void SetUpArrays() {
+            // Loop while the end goal chunk has not been placed.
+            while (!endReached) {
+                // Get a random number between 0 and 4 (inclusive).
+                int randVal = Random.Range(0, 5);
 
-        // Initialise the section columns.
-        gameLevel.levelSections = new Section[gameLevel.numberOfSections.x][];
-        for (int sX = 0; sX < gameLevel.levelSections.Length; sX++) {
-            // Initialise the section rows.
-            gameLevel.levelSections[sX] = new Section[gameLevel.numberOfSections.y];
-            for (int sY = 0; sY < gameLevel.levelSections[sX].Length; sY++) {
-                // Initialise the section.
-                Section currentSection = new Section();
-
-                // Initialise the block columns.
-                currentSection.sectionBlocks = new Block[currentSection.numberOfBlocks.x][];
-                for (int bX = 0; bX < currentSection.sectionBlocks.Length; bX++) {
-                    // Initialise the block rows.
-                    currentSection.sectionBlocks[bX] = new Block[currentSection.numberOfBlocks.y];
-                    for (int bY = 0; bY < currentSection.sectionBlocks[bX].Length; bY++) {
-                        // Nullify the blocks so they can be changed later.
-                        currentSection.sectionBlocks[bX][bY] = null;
-                    }
+                switch (randVal) {
+                    case 0:
+                    case 1:
+                        // Move the path left.
+                        if (CheckAdjacentIsValid(Direction.Left)) {
+                            level.chunkGrid[currentChunk.x, currentChunk.y].exits.Add(ChunkExit.Left);
+                            currentChunk = new Vector2i(currentChunk.x - 1, currentChunk.y);
+                            level.chunkGrid[currentChunk.x, currentChunk.y].types.Add(ChunkType.Path);
+                        }
+                        break;
+                    case 2:
+                    case 3:
+                        // Move the path right.
+                        if (CheckAdjacentIsValid(Direction.Right)) {
+                            level.chunkGrid[currentChunk.x, currentChunk.y].exits.Add(ChunkExit.Right);
+                            currentChunk = new Vector2i(currentChunk.x + 1, currentChunk.y);
+                            level.chunkGrid[currentChunk.x, currentChunk.y].types.Add(ChunkType.Path);
+                        }
+                        break;
+                    case 4:
+                        // Drop the path down.
+                        if (CheckAdjacentIsValid(Direction.Down)) {
+                            level.chunkGrid[currentChunk.x, currentChunk.y].exits.Add(ChunkExit.Bottom);
+                            currentChunk = new Vector2i(currentChunk.x, currentChunk.y - 1);
+                            level.chunkGrid[currentChunk.x, currentChunk.y].types.Add(ChunkType.Path);
+                        } else {
+                            // Set end goal chunk.
+                            if (i == 0) {
+                                level.chunkGrid[currentChunk.x, currentChunk.y].types.Add(ChunkType.Path, ChunkType.EndGoal);
+                            }
+                        }
+                        break;
                 }
 
-                gameLevel.levelSections[sX][sY] = currentSection;
+                // If the current chunk is the end goal, set the end as having been reached.
+                if (level.chunkGrid[currentChunk.x, currentChunk.y].types.HasFlag(ChunkType.EndGoal)) {
+                    endReached = true;
+                }
+            }
+        }
+
+        // Instantiate chunks based on their type and their exits.
+        // TODO: Move into its own method. -Dean
+        for (int gX = 0; gX < level.chunkGrid.GetLength(0); gX++) {
+            for (int gY = 0; gY < level.chunkGrid.GetLength(1); gY++) {
+                Vector3 position = new Vector3(gX * 8, gY * 8, 0);
+
+                Chunk current = level.chunkGrid[gX, gY];
+
+                if (current.types.HasFlag(ChunkType.PlayerStart)) {
+                    // If the chunk is the player start.
+                    GameObject go = Instantiate(StartChunk, position, Quaternion.identity) as GameObject;
+                } else if (current.types.HasFlag(ChunkType.EndGoal)) {
+                    // If the chunk is the end goal.
+                    GameObject go = Instantiate(EndChunk, position, Quaternion.identity) as GameObject;
+                } else {
+                    // Place chunks based on their exits.
+                    if (current.exits.Is(ChunkExit.Left)) {
+                        // Left exit only.
+                        GameObject go = Instantiate(LeftChunk, position, Quaternion.identity) as GameObject;
+                    } else if (current.exits.Is(ChunkExit.Right)) {
+                        // Right exit only.
+                        GameObject go = Instantiate(RightChunk, position, Quaternion.identity) as GameObject;
+                    } else if (current.exits.Is(ChunkExit.Bottom)) {
+                        // Bottom exit only.
+                        GameObject go = Instantiate(DownChunk, position, Quaternion.identity) as GameObject;
+                    } else if (current.exits.Is(ChunkExit.Left, ChunkExit.Right)) {
+                        // Left and right exits.
+                        GameObject go = Instantiate(LeftRightChunk, position, Quaternion.identity) as GameObject;
+                    } else if (current.exits.Is(ChunkExit.Left, ChunkExit.Bottom)) {
+                        // Left and bottom exits.
+                        GameObject go = Instantiate(LeftDownChunk, position, Quaternion.identity) as GameObject;
+                    } else if (current.exits.Is(ChunkExit.Right, ChunkExit.Bottom)) {
+                        // Right and bottom exits.
+                        GameObject go = Instantiate(RightDownChunk, position, Quaternion.identity) as GameObject;
+                    } else if (current.exits.Is(ChunkExit.Left, ChunkExit.Right, ChunkExit.Bottom)) {
+                        // Left, right and bottom exits.
+                        GameObject go = Instantiate(LeftRightDownChunk, position, Quaternion.identity) as GameObject;
+                    } else {
+                        // Non-path chunks (currently impassible).
+                        GameObject go = Instantiate(NonPathChunk, position, Quaternion.identity) as GameObject;
+                    }
+                }
+            }
+        }
+
+        return level;
+    }
+
+    void SetUpArray() {
+
+        level.chunkGrid = new Chunk[level.gridSize.x, level.gridSize.y];
+        for (int gX = 0; gX < level.chunkGrid.GetLength(0); gX++) {
+            for (int gY = 0; gY < level.chunkGrid.GetLength(1); gY++) {
+                level.chunkGrid[gX, gY] = new Chunk(new Vector2i(gX, gY));
             }
         }
     }
 
     // Initialises the start block for the player spawn.
     void InitialiseStartingBlock() {
-        int xStartSection = Random.Range(0, gameLevel.numberOfSections.x);
-        int yStartSection = Random.Range(0, gameLevel.numberOfSections.y);
-        int xStartBlock = Random.Range(0, gameLevel.levelSections[xStartSection][yStartSection].numberOfBlocks.x);
-        int yStartBlock = Random.Range(0, gameLevel.levelSections[xStartSection][yStartSection].numberOfBlocks.y);
+        // Randomly choose a starting point along the top row.
+        startChunk = new Vector2i(Random.Range(0, level.chunkGrid.GetLength(0)), level.chunkGrid.GetLength(1) - 1);
+        // Set the chunk type to teh player start.
+        level.chunkGrid[startChunk.x, startChunk.y].types.Set(ChunkType.PlayerStart, ChunkType.Path);
 
-        int startBlock = Random.Range(0, playerStartBlocks.Length);
+        Debug.Log("Player start: " + startChunk.ToString());
+    }
 
-        if(playerStartBlocks[0] == null){
-            Debug.LogError("There are no starting blocks to choose from.");
-            return;
+    // Checks whether the current chunk is on the edge of the grid.
+    bool CheckAdjacentIsValid(Direction moveDirection) {
+        switch (moveDirection) {
+            case Direction.Left:
+                if (currentChunk.x - 1 < 0)
+                    return false;
+                break;
+            case Direction.Right:
+                if (currentChunk.x + 1 >= level.chunkGrid.GetLength(0))
+                    return false;
+                break;
+            case Direction.Up:
+                if (currentChunk.y + 1 >= level.chunkGrid.GetLength(1))
+                    return false;
+                break;
+            case Direction.Down:
+                if (currentChunk.y - 1 < 0)
+                    return false;
+                break;
         }
 
-        gameLevel.levelSections[xStartSection][yStartSection].sectionBlocks[xStartBlock][yStartBlock] = playerStartBlocks[startBlock];
-
-        Debug.Log("Set starting block to be at (" + xStartSection.ToString() + "," + yStartSection.ToString() + ").(" + xStartBlock.ToString() + "," + yStartSection.ToString() + "), with block type '" + playerStartBlocks[startBlock].name + "'.");
+        return true;
     }
+
 }
