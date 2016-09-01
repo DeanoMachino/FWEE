@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public enum Direction {
+public enum PlayerState {
     Left,
-    Right
+    Right,
 }
 
 public class PlayerController : MonoBehaviour {
@@ -22,7 +22,7 @@ public class PlayerController : MonoBehaviour {
     }
 
     // TODO: Update this to a proper state system. -Dean
-    public Direction directionFacing = Direction.Left;
+    public PlayerState directionFacing = PlayerState.Left;
     public float movementSpeedOnGround = 6f;
     public float movementSpeedInAir = 20f;
     public float jumpForce = 5f;
@@ -73,12 +73,12 @@ public class PlayerController : MonoBehaviour {
 
         // Move the player left.
         if (Input.GetKey(KeyCode.A)) {
-            Move(Direction.Left);
+            Move(PlayerState.Left);
         }
 
         // Move the player right.
         if (Input.GetKey(KeyCode.D)) {
-            Move(Direction.Right);
+            Move(PlayerState.Right);
         }
 
         if((!Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D)) ||
@@ -97,12 +97,12 @@ public class PlayerController : MonoBehaviour {
 
         // Make the player attack with left arm.
         if (Input.GetMouseButtonDown(0)) {
-            Attack(Direction.Left);
+            Attack(PlayerState.Left);
         }
 
         // Make the player attack with right arm.
         if (Input.GetMouseButtonDown(1)) {
-            Attack(Direction.Right);
+            Attack(PlayerState.Right);
         }
 
 
@@ -121,7 +121,7 @@ public class PlayerController : MonoBehaviour {
     }
 
     // Moves the player either to the left or to the right.
-    void Move(Direction direction) {
+    void Move(PlayerState direction) {
         float movement = 1;
 
         // Move the player depending on whether it is grounded or not.
@@ -129,7 +129,7 @@ public class PlayerController : MonoBehaviour {
             // Apply a velocity movement.
 
             // If the player is moving left, reverse the movement.
-            if (direction == Direction.Left) {
+            if (direction == PlayerState.Left) {
                 movement *= -1;
             }
 
@@ -139,7 +139,7 @@ public class PlayerController : MonoBehaviour {
             movement = -(Mathf.Pow(Rigidbody.velocity.x, 2)/(movementSpeedInAir/2)) + (movementSpeedInAir * 2);
 
             // If the player is moving left, reverse the movement.
-            if (direction == Direction.Left) {
+            if (direction == PlayerState.Left) {
                 movement *= -1;
             }
 
@@ -163,23 +163,23 @@ public class PlayerController : MonoBehaviour {
 
     // Performs an attack, depending on which arm is making the attack.
     // TODO: Implement method to handle "super" attack. -Dean
-    void Attack(Direction direction) {
+    void Attack(PlayerState direction) {
 
         if (!IsAttacking) {
             float d = 1;
 
             // TODO: Implement actual attacks with smooth animations. -Dean
             switch (direction) {
-                case Direction.Left:
+                case PlayerState.Left:
                     leftArm.GetComponent<CircleCollider2D>().enabled = true;
-                    if (directionFacing == Direction.Left) {
+                    if (directionFacing == PlayerState.Left) {
                         d *= -1;
                     }
                     leftArm.transform.Translate(0.5f * d, 0, 0);
                     break;
-                case Direction.Right:
+                case PlayerState.Right:
                     rightArm.GetComponent<CircleCollider2D>().enabled = true;
-                    if (directionFacing == Direction.Left) {
+                    if (directionFacing == PlayerState.Left) {
                         d *= -1;
                     }
                     rightArm.transform.Translate(0.5f * d, 0, 0);
@@ -193,12 +193,12 @@ public class PlayerController : MonoBehaviour {
     // Change the player stance to match the direction they are facing.
     void UpdateDirection() {
         if(Input.GetKeyDown(KeyCode.A)) {
-            directionFacing = Direction.Left;
+            directionFacing = PlayerState.Left;
 
             ResetBodyPartPositions();
         }
         if (Input.GetKeyDown(KeyCode.D)) {
-            directionFacing = Direction.Right;
+            directionFacing = PlayerState.Right;
 
             ResetBodyPartPositions();
         }
@@ -206,7 +206,7 @@ public class PlayerController : MonoBehaviour {
 
     void ResetBodyPartPositions() {
         switch (directionFacing) {
-            case Direction.Left:
+            case PlayerState.Left:
                 // Head
                 head.transform.localPosition = headLeftRestPosition;
                 
@@ -221,7 +221,7 @@ public class PlayerController : MonoBehaviour {
                 rightLeg.transform.localPosition = frontLegRestPosition;
                 leftLeg.transform.localPosition = backLegRestPosition;
                 break;
-            case Direction.Right:
+            case PlayerState.Right:
                 // Head
                 head.transform.localPosition = headRightRestPosition;
 

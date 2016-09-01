@@ -1,0 +1,95 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1000012879775774}
+  m_IsPrefabParent: 1
+--- !u!1 &1000012879775774
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 4000012064133442}
+  - 114: {fileID: 114000012423661306}
+  m_Layer: 0
+  m_Name: LevelGenerator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4000012064133442
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012879775774}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+--- !u!114 &114000012423661306
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012879775774}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f29e1d87c1ae9a74ba29036f570e36ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gridSize:
+    x: 8
+    y: 8
+  chunkSize:
+    x: 8
+    y: 8
+  LeftChunk:
+  - {fileID: 1000013042031004, guid: 6d6f86c550bbf5c4497ffd20322b49b9, type: 2}
+  RightChunk:
+  - {fileID: 1000013164494968, guid: 7f1884307dd2e8945ab8ecb9d1673789, type: 2}
+  DownChunk:
+  - {fileID: 1000013164494968, guid: 12d718492a75e01418a1ae18c6107f75, type: 2}
+  UpChunk:
+  - {fileID: 1000013164494968, guid: 7721594e31830b6439715fece5d6d5d3, type: 2}
+  LeftRightChunk:
+  - {fileID: 1000013164494968, guid: 4e6950414630c4145a9e4d50fbfa0e00, type: 2}
+  LeftDownChunk:
+  - {fileID: 1000013164494968, guid: 88705f263755dec41a50163ff63a968c, type: 2}
+  LeftUpChunk:
+  - {fileID: 1000013164494968, guid: a194bcae2616ad64c92565382782d6aa, type: 2}
+  RightDownChunk:
+  - {fileID: 1000013164494968, guid: 2f7f1586ee4644a4b96bd4cb15cd84d6, type: 2}
+  RightUpChunk:
+  - {fileID: 1000013164494968, guid: bdf27e0b0b7b8f640a1b1603e1bca88b, type: 2}
+  DownUpChunk:
+  - {fileID: 1000013164494968, guid: 78dce056afefccd439729f5bafc50feb, type: 2}
+  LeftRightDownChunk:
+  - {fileID: 1000013671363150, guid: f1741b1ff00049a4f9ef540e747f9a62, type: 2}
+  LeftRightUpChunk:
+  - {fileID: 1000013164494968, guid: 657f6a691acb13c47a253d0b12d5988a, type: 2}
+  LeftDownUpChunk:
+  - {fileID: 1000013164494968, guid: 15fce93fa57e57a4c997c236fad01cd7, type: 2}
+  RightDownUpChunk:
+  - {fileID: 1000013164494968, guid: e88ca2d3749cabc45880f095d69dcac1, type: 2}
+  LeftRightDownUpChunk:
+  - {fileID: 1000013164494968, guid: 24df8bec630fd0d429d7a933dca322ea, type: 2}
+  NonPathChunk:
+  - {fileID: 1000013164494968, guid: 3e772457b93dd1c429ae2e7781504bdf, type: 2}
+  StartChunk:
+  - {fileID: 1000013164494968, guid: 7b99e58cb5fb36e4db6d0be7954670db, type: 2}
+  EndChunk:
+  - {fileID: 1000013164494968, guid: 1386d1a5ce9b3794191f37d36ecce574, type: 2}
