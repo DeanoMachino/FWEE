@@ -62,11 +62,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Source\Characters\Enemy.cs" />
+    <Compile Include="Assets\Source\Characters\PlayerController.cs" />
     <Compile Include="Assets\Source\GameManager.cs" />
     <Compile Include="Assets\Source\LevelGeneration\Chunk.cs" />
     <Compile Include="Assets\Source\LevelGeneration\Level.cs" />
     <Compile Include="Assets\Source\LevelGeneration\LevelGenerator.cs" />
-    <Compile Include="Assets\Source\Player\PlayerController.cs" />
     <Compile Include="Assets\Source\Utilities\Flag.cs" />
     <Compile Include="Assets\Source\Utilities\Vector2i.cs" />
     <Compile Include="Assets\SpritesAndBones\Scripts\AnimationWindowUtils.cs" />
