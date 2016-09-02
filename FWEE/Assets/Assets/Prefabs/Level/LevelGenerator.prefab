@@ -58,9 +58,15 @@ MonoBehaviour:
     x: 8
     y: 8
   LeftChunk:
-  - {fileID: 1000013042031004, guid: 6d6f86c550bbf5c4497ffd20322b49b9, type: 2}
+  - {fileID: 1000013164494968, guid: 3770e960f674b22498404855ecf4656d, type: 2}
+  - {fileID: 1000013164494968, guid: 3411b7a443a8a3d4c99d5a88fb7dc3bb, type: 2}
+  - {fileID: 1000013164494968, guid: 4cbcf7c5497d38749b69b389ba5ca37e, type: 2}
+  - {fileID: 1000013164494968, guid: de5738440f455a041ba6fd3226011d8f, type: 2}
+  - {fileID: 1000013164494968, guid: 361ce6d53d739bc45a2a03010065fc15, type: 2}
+  - {fileID: 1000013164494968, guid: 3e2fcc9ac11f6be42ad7cc1bbcae9011, type: 2}
   RightChunk:
-  - {fileID: 1000013164494968, guid: 7f1884307dd2e8945ab8ecb9d1673789, type: 2}
+  - {fileID: 1000013164494968, guid: fa26b8e1e8cb24a4daf929708de91e60, type: 2}
+  - {fileID: 1000013164494968, guid: 9ccfa27541519294b89c392c3e083db2, type: 2}
   DownChunk:
   - {fileID: 1000013164494968, guid: 12d718492a75e01418a1ae18c6107f75, type: 2}
   UpChunk:
