@@ -128,6 +128,10 @@ public class ChunkDesignerWindow : EditorWindow {
 
         clearAfter = EditorGUILayout.Toggle("Clear grid after use?", clearAfter);
 
+        if (GUILayout.Button("Clear grid")) {
+            InitialiseGrid();
+        }
+
         EditorGUILayout.BeginHorizontal();
         {
             if (GUILayout.Button("Create chunk")) {
