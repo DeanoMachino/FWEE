@@ -16,24 +16,41 @@ public class LevelGenerator : MonoBehaviour {
     public Vector2i gridSize = new Vector2i(8, 8);
     public Vector2i chunkSize = new Vector2i(8, 8);
 
-    public GameObject[] LeftChunk;                //1
-    public GameObject[] RightChunk;               //1
-    public GameObject[] DownChunk;                //1
-    public GameObject[] UpChunk;                  //1
-    public GameObject[] LeftRightChunk;           //2
-    public GameObject[] LeftDownChunk;            //2
-    public GameObject[] LeftUpChunk;              //2
-    public GameObject[] RightDownChunk;           //2
-    public GameObject[] RightUpChunk;             //2
-    public GameObject[] DownUpChunk;              //2
-    public GameObject[] LeftRightDownChunk;       //3
-    public GameObject[] LeftRightUpChunk;         //3
-    public GameObject[] LeftDownUpChunk;          //3
-    public GameObject[] RightDownUpChunk;         //3
-    public GameObject[] LeftRightDownUpChunk;     //4
-    public GameObject[] NonPathChunk;
-    public GameObject[] StartChunk;
-    public GameObject[] EndChunk;
+    public GameObject Player;
+
+    public GameObject[] LeftChunks;                //1
+    public GameObject[] RightChunks;               //1
+    public GameObject[] UpChunks;                  //1
+    public GameObject[] DownChunks;                //1
+    public GameObject[] LeftRightChunks;           //2
+    public GameObject[] LeftUpChunks;              //2
+    public GameObject[] LeftDownChunks;            //2
+    public GameObject[] RightUpChunks;             //2
+    public GameObject[] RightDownChunks;           //2
+    public GameObject[] UpDownChunks;              //2
+    public GameObject[] LeftRightUpChunks;         //3
+    public GameObject[] LeftRightDownChunks;       //3
+    public GameObject[] LeftUpDownChunks;          //3
+    public GameObject[] RightUpDownChunks;         //3
+    public GameObject[] LeftRightUpDownChunks;     //4
+
+    public GameObject[] ImpassibleChunks;
+
+    public GameObject[] StartLeftChunks;
+    public GameObject[] StartRightChunks;
+    public GameObject[] StartDownChunks;
+    public GameObject[] StartLeftRightChunks;
+    public GameObject[] StartLeftDownChunks;
+    public GameObject[] StartRightDownChunks;
+    public GameObject[] StartLeftRightDownChunks;
+
+    public GameObject[] EndLeftChunks;
+    public GameObject[] EndRightChunks;
+    public GameObject[] EndUpChunks;
+    public GameObject[] EndLeftRightChunks;
+    public GameObject[] EndLeftUpChunks;
+    public GameObject[] EndRightUpChunks;
+    public GameObject[] EndLeftRightUpChunks;
 
     Vector2i startChunk;
     Vector2i currentChunk;
@@ -134,60 +151,115 @@ public class LevelGenerator : MonoBehaviour {
 
                 if (current.types.HasFlag(ChunkType.PlayerStart)) {
                     // If the chunk is the player start.
-                    InstantiateFromArray(StartChunk, position);
+
+                    GameObject startChunk = new GameObject();
+
+                    if (current.exits.Is(ChunkExit.Left)) {
+                        // Left exit only.
+                        startChunk = InstantiateFromArray(StartLeftChunks, position);
+                    } else if (current.exits.Is(ChunkExit.Right)) {
+                        // Right exit only.
+                        startChunk = InstantiateFromArray(StartRightChunks, position);
+                    } else if (current.exits.Is(ChunkExit.Bottom)) {
+                        // Bottom exit only.
+                        startChunk = InstantiateFromArray(StartDownChunks, position);
+                    } else if (current.exits.Is(ChunkExit.Left, ChunkExit.Right)) {
+                        // Left and right exits.
+                        startChunk = InstantiateFromArray(StartLeftRightChunks, position);
+                    } else if (current.exits.Is(ChunkExit.Left, ChunkExit.Bottom)) {
+                        // Left and bottom exits.
+                        startChunk = InstantiateFromArray(StartLeftDownChunks, position);
+                    } else if (current.exits.Is(ChunkExit.Right, ChunkExit.Bottom)) {
+                        // Right and bottom exits.
+                        startChunk = InstantiateFromArray(StartRightDownChunks, position);
+                    } else if (current.exits.Is(ChunkExit.Left, ChunkExit.Right, ChunkExit.Bottom)) {
+                        // Left, right and bottom exits.
+                        startChunk = InstantiateFromArray(StartLeftRightDownChunks, position);
+                    } else {
+                        Debug.Log("Start chunk error");
+                    }
+
+                    // Spawn player
+                    if(startChunk != null){
+                        GameObject player = Instantiate(Player, startChunk.transform.FindChild("StartPoint").transform.position, Quaternion.identity) as GameObject;
+                    }
                 } else if (current.types.HasFlag(ChunkType.EndGoal)) {
                     // If the chunk is the end goal.
-                    InstantiateFromArray(EndChunk, position);
+                    // If the chunk is the player start.
+                    if (current.exits.Is(ChunkExit.Left)) {
+                        // Left exit only.
+                        InstantiateFromArray(EndLeftChunks, position);
+                    } else if (current.exits.Is(ChunkExit.Right)) {
+                        // Right exit only.
+                        InstantiateFromArray(EndRightChunks, position);
+                    } else if (current.exits.Is(ChunkExit.Top)) {
+                        // Bottom exit only.
+                        InstantiateFromArray(EndUpChunks, position);
+                    } else if (current.exits.Is(ChunkExit.Left, ChunkExit.Right)) {
+                        // Left and right exits.
+                        InstantiateFromArray(EndLeftRightChunks, position);
+                    } else if (current.exits.Is(ChunkExit.Left, ChunkExit.Top)) {
+                        // Left and bottom exits.
+                        InstantiateFromArray(EndLeftUpChunks, position);
+                    } else if (current.exits.Is(ChunkExit.Right, ChunkExit.Top)) {
+                        // Right and bottom exits.
+                        InstantiateFromArray(EndRightUpChunks, position);
+                    } else if (current.exits.Is(ChunkExit.Left, ChunkExit.Right, ChunkExit.Top)) {
+                        // Left, right and bottom exits.
+                        InstantiateFromArray(EndLeftRightUpChunks, position);
+                    } else {
+                        Debug.Log("End chunk error");
+                    }
                 } else {
                     // Place chunks based on their exits.
                     if (current.exits.Is(ChunkExit.Left)) {
                         // Left exit only.
-                        InstantiateFromArray(LeftChunk, position);
+                        InstantiateFromArray(LeftChunks, position);
                     } else if (current.exits.Is(ChunkExit.Right)) {
                         // Right exit only.
-                        InstantiateFromArray(RightChunk, position);
+                        InstantiateFromArray(RightChunks, position);
                     } else if (current.exits.Is(ChunkExit.Bottom)) {
                         // Bottom exit only.
-                        InstantiateFromArray(DownChunk, position);
+                        InstantiateFromArray(DownChunks, position);
                     } else if (current.exits.Is(ChunkExit.Top)) {
                         // Top exit only.
-                        InstantiateFromArray(UpChunk, position);
+                        InstantiateFromArray(UpChunks, position);
                     } else if (current.exits.Is(ChunkExit.Left, ChunkExit.Right)) {
                         // Left and right exits.
-                        InstantiateFromArray(LeftRightChunk, position);
+                        InstantiateFromArray(LeftRightChunks, position);
                     } else if (current.exits.Is(ChunkExit.Left, ChunkExit.Bottom)) {
                         // Left and bottom exits.
-                        InstantiateFromArray(LeftDownChunk, position);
+                        InstantiateFromArray(LeftDownChunks, position);
                     } else if (current.exits.Is(ChunkExit.Left, ChunkExit.Top)) {
                         // Left and top exits.
-                        InstantiateFromArray(LeftUpChunk, position);
+                        InstantiateFromArray(LeftUpChunks, position);
                     } else if (current.exits.Is(ChunkExit.Right, ChunkExit.Bottom)) {
                         // Right and bottom exits.
-                        InstantiateFromArray(RightDownChunk, position);
+                        InstantiateFromArray(RightDownChunks, position);
                     } else if (current.exits.Is(ChunkExit.Right, ChunkExit.Top)) {
                         // Right and top exits.
-                        InstantiateFromArray(RightUpChunk, position);
+                        InstantiateFromArray(RightUpChunks, position);
                     } else if (current.exits.Is(ChunkExit.Bottom, ChunkExit.Top)) {
                         // Bottom and top exits.
-                        InstantiateFromArray(DownUpChunk, position);
+                        InstantiateFromArray(UpDownChunks, position);
                     } else if (current.exits.Is(ChunkExit.Left, ChunkExit.Right, ChunkExit.Bottom)) {
                         // Left, right and bottom exits.
-                        InstantiateFromArray(LeftRightDownChunk, position);
+                        InstantiateFromArray(LeftRightDownChunks, position);
                     } else if (current.exits.Is(ChunkExit.Left, ChunkExit.Right, ChunkExit.Top)) {
                         // Left, right and top exits.
-                        InstantiateFromArray(LeftRightUpChunk, position);
+                        InstantiateFromArray(LeftRightUpChunks, position);
                     } else if (current.exits.Is(ChunkExit.Left, ChunkExit.Bottom, ChunkExit.Top)) {
                         // Left, bottom and top exits.
-                        InstantiateFromArray(LeftDownUpChunk, position);
+                        InstantiateFromArray(LeftUpDownChunks, position);
                     } else if (current.exits.Is(ChunkExit.Right, ChunkExit.Bottom, ChunkExit.Top)) {
                         // Right, bottom and top exits.
-                        InstantiateFromArray(RightDownUpChunk, position);
+                        InstantiateFromArray(RightUpDownChunks, position);
                     } else if (current.exits.Is(ChunkExit.Left, ChunkExit.Right, ChunkExit.Bottom, ChunkExit.Top)) {
                         // Left, right, bottom and top exits.
-                        InstantiateFromArray(LeftRightDownUpChunk, position);
+                        InstantiateFromArray(LeftRightUpDownChunks, position);
                     } else {
                         // Non-path chunks (currently impassible).
-                        InstantiateFromArray(NonPathChunk, position);
+                        InstantiateFromArray(ImpassibleChunks, position);
                     }
                 }
             }
@@ -216,11 +288,13 @@ public class LevelGenerator : MonoBehaviour {
         Debug.Log("Player start: " + startChunk.ToString());
     }
 
-    // Instantiates a random prefab from a given array.
-    void InstantiateFromArray(GameObject[] prefabs, Vector3 position) {
+    // Instantiates a random prefab from a given array and returns it.
+    GameObject InstantiateFromArray(GameObject[] prefabs, Vector3 position) {
         int randomIndex = Random.Range(0, prefabs.Length);
 
         GameObject go = Instantiate(prefabs[randomIndex], position, Quaternion.identity) as GameObject;
+
+        return go;
     }
 
     // Checks whether the current chunk is on the edge of the grid.

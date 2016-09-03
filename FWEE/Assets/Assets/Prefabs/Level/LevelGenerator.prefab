@@ -55,47 +55,93 @@ MonoBehaviour:
     x: 8
     y: 8
   chunkSize:
-    x: 8
-    y: 8
-  LeftChunk:
-  - {fileID: 1000013164494968, guid: 3770e960f674b22498404855ecf4656d, type: 2}
-  - {fileID: 1000013164494968, guid: 3411b7a443a8a3d4c99d5a88fb7dc3bb, type: 2}
-  - {fileID: 1000013164494968, guid: 4cbcf7c5497d38749b69b389ba5ca37e, type: 2}
-  - {fileID: 1000013164494968, guid: de5738440f455a041ba6fd3226011d8f, type: 2}
-  - {fileID: 1000013164494968, guid: 361ce6d53d739bc45a2a03010065fc15, type: 2}
-  - {fileID: 1000013164494968, guid: 3e2fcc9ac11f6be42ad7cc1bbcae9011, type: 2}
-  RightChunk:
-  - {fileID: 1000013164494968, guid: fa26b8e1e8cb24a4daf929708de91e60, type: 2}
-  - {fileID: 1000013164494968, guid: 9ccfa27541519294b89c392c3e083db2, type: 2}
-  DownChunk:
-  - {fileID: 1000013164494968, guid: 12d718492a75e01418a1ae18c6107f75, type: 2}
-  UpChunk:
-  - {fileID: 1000013164494968, guid: 7721594e31830b6439715fece5d6d5d3, type: 2}
-  LeftRightChunk:
-  - {fileID: 1000013164494968, guid: 4e6950414630c4145a9e4d50fbfa0e00, type: 2}
-  LeftDownChunk:
-  - {fileID: 1000013164494968, guid: 88705f263755dec41a50163ff63a968c, type: 2}
-  LeftUpChunk:
-  - {fileID: 1000013164494968, guid: a194bcae2616ad64c92565382782d6aa, type: 2}
-  RightDownChunk:
-  - {fileID: 1000013164494968, guid: 2f7f1586ee4644a4b96bd4cb15cd84d6, type: 2}
-  RightUpChunk:
-  - {fileID: 1000013164494968, guid: bdf27e0b0b7b8f640a1b1603e1bca88b, type: 2}
-  DownUpChunk:
-  - {fileID: 1000013164494968, guid: 78dce056afefccd439729f5bafc50feb, type: 2}
-  LeftRightDownChunk:
-  - {fileID: 1000013671363150, guid: f1741b1ff00049a4f9ef540e747f9a62, type: 2}
-  LeftRightUpChunk:
-  - {fileID: 1000013164494968, guid: 657f6a691acb13c47a253d0b12d5988a, type: 2}
-  LeftDownUpChunk:
-  - {fileID: 1000013164494968, guid: 15fce93fa57e57a4c997c236fad01cd7, type: 2}
-  RightDownUpChunk:
-  - {fileID: 1000013164494968, guid: e88ca2d3749cabc45880f095d69dcac1, type: 2}
-  LeftRightDownUpChunk:
-  - {fileID: 1000013164494968, guid: 24df8bec630fd0d429d7a933dca322ea, type: 2}
-  NonPathChunk:
-  - {fileID: 1000013164494968, guid: 3e772457b93dd1c429ae2e7781504bdf, type: 2}
-  StartChunk:
-  - {fileID: 1000013164494968, guid: 7b99e58cb5fb36e4db6d0be7954670db, type: 2}
-  EndChunk:
-  - {fileID: 1000013164494968, guid: 1386d1a5ce9b3794191f37d36ecce574, type: 2}
+    x: 16
+    y: 16
+  LeftChunks:
+  - {fileID: 1000014140439494, guid: 3770e960f674b22498404855ecf4656d, type: 2}
+  - {fileID: 1000010069432422, guid: 3411b7a443a8a3d4c99d5a88fb7dc3bb, type: 2}
+  RightChunks:
+  - {fileID: 1000010898698694, guid: fa26b8e1e8cb24a4daf929708de91e60, type: 2}
+  - {fileID: 1000010568883530, guid: 9ccfa27541519294b89c392c3e083db2, type: 2}
+  UpChunks:
+  - {fileID: 1000013046720724, guid: 0b1d7034e2667204486aa13027450de8, type: 2}
+  - {fileID: 1000012082230262, guid: 7a48fda7c31ccfc42b9d04a5a8ae79de, type: 2}
+  - {fileID: 1000014063986572, guid: 2a3b86be23df22e4fa55ddd5ec954681, type: 2}
+  DownChunks:
+  - {fileID: 1000013355934828, guid: 88a8ed6296f590e449ac095ce81396bc, type: 2}
+  - {fileID: 1000014172679782, guid: fab067c5e6c31824fa14c24d492a09d7, type: 2}
+  - {fileID: 1000012784957198, guid: ca6ce4968894ea34ab5ad06bdcc35849, type: 2}
+  - {fileID: 1000011778220438, guid: 71b2a7997a942394983483d8463c9777, type: 2}
+  - {fileID: 1000011722711632, guid: cda351fa7d9f93e468b627b2a371b0cc, type: 2}
+  - {fileID: 1000012581914230, guid: 6698f64dac2330546aff95236a9d60bb, type: 2}
+  LeftRightChunks:
+  - {fileID: 1000012085929574, guid: 97b52c88416e4d44aacac3a3c98c3b96, type: 2}
+  - {fileID: 1000011638289904, guid: d44ed9db5450fa545be5e39c3964d876, type: 2}
+  - {fileID: 1000011114706018, guid: 472cc68e2f705cf4285d3d9ff6c1a75f, type: 2}
+  - {fileID: 1000013332283690, guid: 9e083dbf53a6e6342a782c1712d9262d, type: 2}
+  LeftUpChunks:
+  - {fileID: 1000010328048484, guid: a0c77140f0fb5cb41afa065067c7bd32, type: 2}
+  - {fileID: 1000011674478362, guid: b564bde89b8e37148a057174e2b89f59, type: 2}
+  - {fileID: 1000012090747300, guid: d4760f1b4ddd88e41b9fee37bfa295f9, type: 2}
+  LeftDownChunks:
+  - {fileID: 1000010269086632, guid: 733c90d082fc48640a6e82d1e53ef892, type: 2}
+  - {fileID: 1000012649454242, guid: 889f472c3a6877f4281a72fe9e39b62c, type: 2}
+  - {fileID: 1000011466168718, guid: 9677173ead0e61b48ae0215ef4378a39, type: 2}
+  RightUpChunks:
+  - {fileID: 1000012867677104, guid: 2183e93b9e5414f42a601ee496b8cfee, type: 2}
+  - {fileID: 1000010538927790, guid: aec9546c2dc83b846be502330c0e2bd2, type: 2}
+  - {fileID: 1000011693737608, guid: 813fffad92a48e148920fbd5abef4d86, type: 2}
+  RightDownChunks:
+  - {fileID: 1000012616158350, guid: 62d26b5977510e24a99ee4941ebda821, type: 2}
+  - {fileID: 1000010273391994, guid: e44908ad82af290468ad0f6a1f76bc81, type: 2}
+  - {fileID: 1000010690920164, guid: e7a467de5de6e0e4c8e902e36c2e9529, type: 2}
+  UpDownChunks:
+  - {fileID: 1000010384145496, guid: 99c35ee2ae2686047982883e8e4dbefa, type: 2}
+  - {fileID: 1000011368333036, guid: d8f1bdfa4ce794f47bc782243712a0f7, type: 2}
+  - {fileID: 1000013695942914, guid: b13aa99ec627269479fdd08e1bd03df6, type: 2}
+  - {fileID: 1000010960565734, guid: 556cc9cf853e4664680071ebc588d847, type: 2}
+  LeftRightUpChunks:
+  - {fileID: 1000013942256206, guid: 435a9478d0087c74e96df09a0c66afe2, type: 2}
+  - {fileID: 1000013607705096, guid: 6635115a632b0654f965052e97de8392, type: 2}
+  - {fileID: 1000014096781908, guid: 6dd1b97b55ab3934584fb7ba33bd5d55, type: 2}
+  - {fileID: 1000014270523852, guid: c331424db8648db47a95c0affa3f1005, type: 2}
+  LeftRightDownChunks:
+  - {fileID: 1000012123285266, guid: 588f2ed0220dbb948b331c59a26d88e3, type: 2}
+  - {fileID: 1000013266243286, guid: 1965f2591e9ced0459b34c6eb7d3876a, type: 2}
+  - {fileID: 1000013313849166, guid: 30d404ec2b19fd84f8692eccbe627bd2, type: 2}
+  LeftUpDownChunks:
+  - {fileID: 1000011729801908, guid: dece7fcbb37f0f84b91d361aa8ea4eff, type: 2}
+  RightUpDownChunks:
+  - {fileID: 1000012111261736, guid: aad8a0e547798fa46b92bffb1cea7dc3, type: 2}
+  LeftRightUpDownChunks:
+  - {fileID: 1000010757946164, guid: 0b8762d52679a3247a5e006f07566a75, type: 2}
+  ImpassibleChunks:
+  - {fileID: 1000013910667028, guid: dd13bd498f7bfb74fbe2eac45ceb9cad, type: 2}
+  StartLeftChunks:
+  - {fileID: 1000010797541684, guid: 5dff288b6c4eb014db333fc8830e9fc5, type: 2}
+  StartRightChunks:
+  - {fileID: 1000012448705518, guid: ccb33a7873ba70c41964deb554bdd6e2, type: 2}
+  StartDownChunks:
+  - {fileID: 1000010408190488, guid: 10c20101c7211cc4cabadf839d0eb614, type: 2}
+  StartLeftRightChunks:
+  - {fileID: 1000012896523920, guid: a0abd2984a943564198e6a22458eb3ff, type: 2}
+  StartLeftDownChunks:
+  - {fileID: 1000010643130188, guid: 447ee92426a39b64d8fd70d33d04dfbf, type: 2}
+  StartRightDownChunks:
+  - {fileID: 1000011873415372, guid: cc0a5933803826040978de2931a34411, type: 2}
+  StartLeftRightDownChunks:
+  - {fileID: 1000010282739758, guid: 941d4d373beb8d34fbe7600e0e3ebf87, type: 2}
+  EndLeftChunks:
+  - {fileID: 1000013725855482, guid: 90704893b4847334ba49ea3eed461366, type: 2}
+  EndRightChunks:
+  - {fileID: 1000013107146134, guid: e75ba5eb7b44e3241b8f9060f668533c, type: 2}
+  EndUpChunks:
+  - {fileID: 1000013149888090, guid: ae848f8d388ad3343bd3f56f0d34e064, type: 2}
+  EndLeftRightChunks:
+  - {fileID: 1000011451345654, guid: 423d1c89f32a7da48b8973f131a3f828, type: 2}
+  EndLeftUpChunks:
+  - {fileID: 1000010937733122, guid: 38ec9fa3860091541825a22d6c4647eb, type: 2}
+  EndRightUpChunks:
+  - {fileID: 1000010073810026, guid: 4612f5d2f82eb6645a12b953e453ff35, type: 2}
+  EndLeftRightUpChunks:
+  - {fileID: 1000011935952512, guid: 98f8370b97aa3274e807993fb6122f00, type: 2}
