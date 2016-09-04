@@ -8,18 +8,21 @@ public enum PlayerState {
 
 public class PlayerController : MonoBehaviour {
 
-    public GameObject head;
-    public GameObject body;
+
     public GameObject leftArm;
     public GameObject rightArm;
-    public GameObject leftLeg;
-    public GameObject rightLeg;
-
+   
     public Rigidbody2D Rigidbody {
         get {
             return GetComponent<Rigidbody2D>();
         }
     }
+
+
+    Skeleton skeleton { get { return this.GetComponentInChildren<Skeleton>(); } }
+   
+    Animator animator {  get { return GetComponent<Animator>(); } }
+    bool walking;
 
     // TODO: Update this to a proper state system. -Dean
     public PlayerState directionFacing = PlayerState.Left;
@@ -30,14 +33,9 @@ public class PlayerController : MonoBehaviour {
     public float attackDelay = 1f;
     float attackTimeout = 0f;
 
-    Vector3 headLeftRestPosition = new Vector3(-0.15f, 0.9f, 0);
-    Vector3 headRightRestPosition = new Vector3(0.15f, 0.9f, 0);
-    Vector3 leftBackArmRestPosition = new Vector3(0.45f, 0, 0);
-    Vector3 leftFrontArmRestPosition = new Vector3(0.45f, -0.2f, 0);
-    Vector3 rightBackArmRestPosition = new Vector3(-0.45f, 0, 0);
-    Vector3 rightFrontArmRestPosition = new Vector3(-0.45f, -0.2f, 0);
-    Vector3 frontLegRestPosition = new Vector3(0.4f, -0.8f, 0);
-    Vector3 backLegRestPosition = new Vector3(-0.3f, -0.8f, 0);
+
+
+
 
     // Returns whether the player is on the ground.
     // NOTE: This works for flat pieces of ground but will not work for slopes. -Dean
@@ -64,45 +62,77 @@ public class PlayerController : MonoBehaviour {
 
     // Use this for initialization.
     void Start() {
-        ResetBodyPartPositions();
+        //ResetBodyPartPositions();
+        Rigidbody.constraints = RigidbodyConstraints2D.FreezeRotation;
     }
 
     // Update is called once per frame.
-    void Update() {
-        UpdateDirection();
+    void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.M))
+        {
+            skeleton.flipY = true;
+        }
+        Camera.main.transform.position = new Vector3(transform.position.x, transform.position.y, Camera.main.transform.position.z);
+
 
         // Move the player left.
         if (Input.GetKey(KeyCode.A)) {
             Move(PlayerState.Left);
+            walking = true;
+            if(!skeleton.flipY)
+            {
+                skeleton.flipY = true;
+            }
         }
 
         // Move the player right.
         if (Input.GetKey(KeyCode.D)) {
             Move(PlayerState.Right);
+            walking = true;
+
+            if(skeleton.flipY)
+            {
+                skeleton.flipY = false;
+            }
         }
 
         if((!Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D)) ||
             Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.D)) {
             if(IsGrounded){
-                Rigidbody.velocity = new Vector2(0, 0);
-            } else {
+                Rigidbody.velocity = new Vector2(0, 0);             
+                walking = false;
+            }
+            else {
                 Rigidbody.velocity = new Vector2(Rigidbody.velocity.x * 0.98f, Rigidbody.velocity.y);
             }
         }
 
+
+        animator.SetBool("Moving", walking);
         // Make the player jump.
         if (Input.GetKeyDown(KeyCode.Space)) {
-            Jump();
+            if (IsGrounded)
+            {
+                animator.SetTrigger("Jump");
+            }
+            //Jump();
         }
 
+        if(Input.GetMouseButtonDown(0) && Input.GetMouseButtonDown(1))
+        {
+            animator.SetTrigger("DoublePunch");
+        }
         // Make the player attack with left arm.
-        if (Input.GetMouseButtonDown(0)) {
-            Attack(PlayerState.Left);
+       else if (Input.GetMouseButtonDown(0)) {
+            //Attack(PlayerState.Left);
+            animator.SetTrigger("LeftPunch");
         }
 
         // Make the player attack with right arm.
-        if (Input.GetMouseButtonDown(1)) {
-            Attack(PlayerState.Right);
+       else if (Input.GetMouseButtonDown(1)) {
+            //Attack(PlayerState.Right);
+            animator.SetTrigger("RightPunch");
         }
 
 
@@ -111,7 +141,6 @@ public class PlayerController : MonoBehaviour {
             attackTimeout -= Time.deltaTime;
 
             if (attackTimeout <= 0f) {
-                ResetBodyPartPositions();
                 leftArm.GetComponent<CircleCollider2D>().enabled = false;
                 rightArm.GetComponent<CircleCollider2D>().enabled = false;
                 attackTimeout = 0;
@@ -187,55 +216,6 @@ public class PlayerController : MonoBehaviour {
             }
 
             attackTimeout = attackDelay;
-        }
-    }
-
-    // Change the player stance to match the direction they are facing.
-    void UpdateDirection() {
-        if(Input.GetKeyDown(KeyCode.A)) {
-            directionFacing = PlayerState.Left;
-
-            ResetBodyPartPositions();
-        }
-        if (Input.GetKeyDown(KeyCode.D)) {
-            directionFacing = PlayerState.Right;
-
-            ResetBodyPartPositions();
-        }
-    }
-
-    void ResetBodyPartPositions() {
-        switch (directionFacing) {
-            case PlayerState.Left:
-                // Head
-                head.transform.localPosition = headLeftRestPosition;
-                
-                // Arms
-                leftArm.transform.localPosition = leftFrontArmRestPosition;
-                rightArm.transform.localPosition = rightBackArmRestPosition;
-
-                leftArm.GetComponent<SpriteRenderer>().sortingOrder = 2;
-                rightArm.GetComponent<SpriteRenderer>().sortingOrder = 0;
-
-                // Legs
-                rightLeg.transform.localPosition = frontLegRestPosition;
-                leftLeg.transform.localPosition = backLegRestPosition;
-                break;
-            case PlayerState.Right:
-                // Head
-                head.transform.localPosition = headRightRestPosition;
-
-                // Arms
-                rightArm.transform.localPosition = rightFrontArmRestPosition;
-                leftArm.transform.localPosition = leftBackArmRestPosition;
-
-                leftArm.GetComponent<SpriteRenderer>().sortingOrder = 0;
-                rightArm.GetComponent<SpriteRenderer>().sortingOrder = 2;
-
-                // Legs
-                leftLeg.transform.localPosition = frontLegRestPosition;
-                rightLeg.transform.localPosition = backLegRestPosition;
-                break;
         }
     }
 }
