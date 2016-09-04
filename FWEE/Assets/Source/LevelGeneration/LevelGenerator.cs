@@ -181,7 +181,7 @@ public class LevelGenerator : MonoBehaviour {
         // Set enemy spawners.
         foreach (Chunk c in level.chunkGrid) {
             if (c.types.HasFlag(ChunkType.Path) && !c.types.HasFlag(ChunkType.PlayerStart) && !c.types.HasFlag(ChunkType.EndGoal) && !c.types.HasFlag(ChunkType.ItemFountain) && !c.types.HasFlag(ChunkType.EnemySpawner)) {
-                if (Random.value < 0.2f) {
+                if (Random.value < 0.5f) {
                     c.types.Add(ChunkType.EnemySpawner);
                 }
             }

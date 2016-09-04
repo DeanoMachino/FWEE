@@ -1615,8 +1615,10 @@ MonoBehaviour:
   directionFacing: 0
   movementSpeedOnGround: 6
   movementSpeedInAir: 6
-  jumpForce: 8
+  jumpForce: 12
   attackDelay: 1
+  orbCountText: {fileID: 114000010682886394, guid: bc05c6f327477c5439a93aeb261f9fbe,
+    type: 2}
 --- !u!114 &114000014012320762
 MonoBehaviour:
   m_ObjectHideFlags: 1

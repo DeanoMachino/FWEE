@@ -9,7 +9,7 @@ public class EnemySpawner : MonoBehaviour {
     int spawned = 0;
 
     public float spawnDelay = 10.0f;
-    public float spawnChance = 0.2f;
+    public float spawnChance = 0.4f;
     float spawnTime;
 
 	// Use this for initialization
