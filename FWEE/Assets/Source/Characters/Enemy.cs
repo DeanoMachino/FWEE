@@ -40,8 +40,9 @@ public class Enemy : MonoBehaviour {
 	// Update is called once per frame
 	void FixedUpdate ()
     {
-        
 
+        transform.localRotation = Quaternion.Lerp(transform.localRotation, new Quaternion(0, 0, 0, 1), 100*Time.deltaTime);
+        
         currentVelocity = body.velocity.magnitude;
         if (!chasing)
         {
@@ -56,8 +57,6 @@ public class Enemy : MonoBehaviour {
                     body.AddForce(new Vector2(speed * Time.deltaTime, 0));
                 }
             }
-
-
         }
         else
         {
@@ -82,9 +81,6 @@ public class Enemy : MonoBehaviour {
                 }
             }
         }
-
-
-
         VelocityCheck();
     }
 
@@ -93,7 +89,6 @@ public class Enemy : MonoBehaviour {
         if(col.gameObject.tag == "Platform")
         {
             Collider2D collider = col.collider;
-            
            
             float rectWidth = this.GetComponent<Collider2D>().bounds.size.x;
             float rectHeight = this.GetComponent<Collider2D>().bounds.size.y;
@@ -107,27 +102,31 @@ public class Enemy : MonoBehaviour {
             float cp = contactPoint.y;
             float pc = playerCenter.y;
             float l = (rectHeight / 2);
-            Debug.Log("platform hit CP:" + contactPoint.y.ToString() + " PC:" + playerCenter.y.ToString() + " L:" + (rectHeight/2) + " PC - L:" + (pc - l).ToString() );
+            //Debug.Log("platform hit CP:" + contactPoint.y.ToString() + " PC:" + playerCenter.y.ToString() + " L:" + (rectHeight/2) + " PC - L:" + (pc - l).ToString() );
 
             if((pc - l) + 0.1 > cp &&  (pc - l) - 0.1 < cp )
             {
-                Debug.Log("floor platform");
+                
             }
             else
             {
                 if(playerCenter.x < contactPoint.x)
                 {
+                    if(!movingLeft)
+                    {
+                        GetComponentInChildren<Skeleton>().flipY = true;
+                    }
                     movingLeft = true;
                 }
                 else
                 {
+                    if (movingLeft)
+                    {
+                        GetComponentInChildren<Skeleton>().flipY = false;
+                    }
                     movingLeft = false;
                 }
             }
-
-        
-
-
 
         }
         if(punching)
