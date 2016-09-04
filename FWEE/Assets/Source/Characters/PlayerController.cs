@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public enum PlayerState {
     Left,
@@ -11,14 +12,14 @@ public class PlayerController : MonoBehaviour {
 
     public GameObject leftArm;
     public GameObject rightArm;
-   
+
     public Rigidbody2D Rigidbody {
         get {
             return GetComponent<Rigidbody2D>();
         }
     }
 
-
+    AudioSource audioSource; 
     Skeleton skeleton { get { return this.GetComponentInChildren<Skeleton>(); } }
    
     Animator animator {  get { return GetComponent<Animator>(); } }
@@ -33,8 +34,10 @@ public class PlayerController : MonoBehaviour {
     public float attackDelay = 1f;
     float attackTimeout = 0f;
 
+    bool punching = false;
 
-
+    float orbManaCount = 0;
+    public Text orbCountText;
 
 
     // Returns whether the player is on the ground.
@@ -61,14 +64,20 @@ public class PlayerController : MonoBehaviour {
     }
 
     // Use this for initialization.
-    void Start() {
+    void Start()
+    {
         //ResetBodyPartPositions();
         Rigidbody.constraints = RigidbodyConstraints2D.FreezeRotation;
+        gameObject.AddComponent<AudioSource>();
+        audioSource = GetComponent<AudioSource>();
+
+
     }
 
     // Update is called once per frame.
     void Update()
     {
+        OrbCountUpdate();
         if(Input.GetKeyDown(KeyCode.M))
         {
             skeleton.flipY = true;
@@ -218,4 +227,44 @@ public class PlayerController : MonoBehaviour {
             attackTimeout = attackDelay;
         }
     }
+
+    void StartPunching()
+    {
+        punching = true;
+    }
+
+    void StopPunching()
+    {
+        punching = false;
+    }
+
+    void OnTriggerEnter2D(Collider2D col)
+    {
+
+     
+        if (col.gameObject.tag == "Enemy")
+        {
+            
+            if (punching)
+            {
+                col.gameObject.GetComponentInChildren<HealthBar>().TakeDamage(30);
+                punching = false;
+            }
+        }
+    }
+    void OnCollisionEnter2D(Collision2D col)
+    {
+        if(col.gameObject.tag == "Orb")
+        {
+            Destroy(col.gameObject);
+            orbManaCount++;
+            //play sound
+        }
+    }
+
+    void OrbCountUpdate()
+    {
+        orbCountText.text = orbManaCount.ToString();
+    }
+
 }

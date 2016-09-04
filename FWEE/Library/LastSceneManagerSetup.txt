@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Assets/Scenes/Test-BlockDesign.unity
+- path: Assets/Assets/Scenes/Test-Ade.unity
   isLoaded: 1
   isActive: 1
