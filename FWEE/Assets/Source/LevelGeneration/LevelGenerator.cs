@@ -52,6 +52,8 @@ public class LevelGenerator : MonoBehaviour {
     public GameObject[] EndRightUpChunks;
     public GameObject[] EndLeftRightUpChunks;
 
+    public SpriteSet EarthSprites;
+
     Vector2i startChunk;
     Vector2i currentChunk;
     Direction previousMove;
@@ -149,64 +151,63 @@ public class LevelGenerator : MonoBehaviour {
 
                 Chunk current = level.chunkGrid[gX, gY];
 
+                GameObject chunk = new GameObject();
+
                 if (current.types.HasFlag(ChunkType.PlayerStart)) {
                     // If the chunk is the player start.
 
-                    GameObject startChunk = new GameObject();
-
                     if (current.exits.Is(ChunkExit.Left)) {
                         // Left exit only.
-                        startChunk = InstantiateFromArray(StartLeftChunks, position);
+                        chunk = InstantiateFromArray(StartLeftChunks, position);
                     } else if (current.exits.Is(ChunkExit.Right)) {
                         // Right exit only.
-                        startChunk = InstantiateFromArray(StartRightChunks, position);
+                        chunk = InstantiateFromArray(StartRightChunks, position);
                     } else if (current.exits.Is(ChunkExit.Bottom)) {
                         // Bottom exit only.
-                        startChunk = InstantiateFromArray(StartDownChunks, position);
+                        chunk = InstantiateFromArray(StartDownChunks, position);
                     } else if (current.exits.Is(ChunkExit.Left, ChunkExit.Right)) {
                         // Left and right exits.
-                        startChunk = InstantiateFromArray(StartLeftRightChunks, position);
+                        chunk = InstantiateFromArray(StartLeftRightChunks, position);
                     } else if (current.exits.Is(ChunkExit.Left, ChunkExit.Bottom)) {
                         // Left and bottom exits.
-                        startChunk = InstantiateFromArray(StartLeftDownChunks, position);
+                        chunk = InstantiateFromArray(StartLeftDownChunks, position);
                     } else if (current.exits.Is(ChunkExit.Right, ChunkExit.Bottom)) {
                         // Right and bottom exits.
-                        startChunk = InstantiateFromArray(StartRightDownChunks, position);
+                        chunk = InstantiateFromArray(StartRightDownChunks, position);
                     } else if (current.exits.Is(ChunkExit.Left, ChunkExit.Right, ChunkExit.Bottom)) {
                         // Left, right and bottom exits.
-                        startChunk = InstantiateFromArray(StartLeftRightDownChunks, position);
+                        chunk = InstantiateFromArray(StartLeftRightDownChunks, position);
                     } else {
                         Debug.Log("Start chunk error");
                     }
 
                     // Spawn player
-                    if(startChunk != null){
-                        GameObject player = Instantiate(Player, startChunk.transform.FindChild("StartPoint").transform.position, Quaternion.identity) as GameObject;
-                    }
+                    GameObject player = Instantiate(Player, chunk.transform.FindChild("StartPoint").transform.position, Quaternion.identity) as GameObject;
+                    
                 } else if (current.types.HasFlag(ChunkType.EndGoal)) {
                     // If the chunk is the end goal.
                     // If the chunk is the player start.
                     if (current.exits.Is(ChunkExit.Left)) {
                         // Left exit only.
-                        InstantiateFromArray(EndLeftChunks, position);
+                        chunk = InstantiateFromArray(EndLeftChunks, position);
                     } else if (current.exits.Is(ChunkExit.Right)) {
                         // Right exit only.
-                        InstantiateFromArray(EndRightChunks, position);
+                        chunk = InstantiateFromArray(EndRightChunks, position);
                     } else if (current.exits.Is(ChunkExit.Top)) {
                         // Bottom exit only.
-                        InstantiateFromArray(EndUpChunks, position);
+                        chunk = InstantiateFromArray(EndUpChunks, position);
                     } else if (current.exits.Is(ChunkExit.Left, ChunkExit.Right)) {
                         // Left and right exits.
-                        InstantiateFromArray(EndLeftRightChunks, position);
+                        chunk = InstantiateFromArray(EndLeftRightChunks, position);
                     } else if (current.exits.Is(ChunkExit.Left, ChunkExit.Top)) {
                         // Left and bottom exits.
-                        InstantiateFromArray(EndLeftUpChunks, position);
+                        chunk = InstantiateFromArray(EndLeftUpChunks, position);
                     } else if (current.exits.Is(ChunkExit.Right, ChunkExit.Top)) {
                         // Right and bottom exits.
-                        InstantiateFromArray(EndRightUpChunks, position);
+                        chunk = InstantiateFromArray(EndRightUpChunks, position);
                     } else if (current.exits.Is(ChunkExit.Left, ChunkExit.Right, ChunkExit.Top)) {
                         // Left, right and bottom exits.
-                        InstantiateFromArray(EndLeftRightUpChunks, position);
+                        chunk = InstantiateFromArray(EndLeftRightUpChunks, position);
                     } else {
                         Debug.Log("End chunk error");
                     }
@@ -214,54 +215,125 @@ public class LevelGenerator : MonoBehaviour {
                     // Place chunks based on their exits.
                     if (current.exits.Is(ChunkExit.Left)) {
                         // Left exit only.
-                        InstantiateFromArray(LeftChunks, position);
+                        chunk = InstantiateFromArray(LeftChunks, position);
                     } else if (current.exits.Is(ChunkExit.Right)) {
                         // Right exit only.
-                        InstantiateFromArray(RightChunks, position);
+                        chunk = InstantiateFromArray(RightChunks, position);
                     } else if (current.exits.Is(ChunkExit.Bottom)) {
                         // Bottom exit only.
-                        InstantiateFromArray(DownChunks, position);
+                        chunk = InstantiateFromArray(DownChunks, position);
                     } else if (current.exits.Is(ChunkExit.Top)) {
                         // Top exit only.
-                        InstantiateFromArray(UpChunks, position);
+                        chunk = InstantiateFromArray(UpChunks, position);
                     } else if (current.exits.Is(ChunkExit.Left, ChunkExit.Right)) {
                         // Left and right exits.
-                        InstantiateFromArray(LeftRightChunks, position);
+                        chunk = InstantiateFromArray(LeftRightChunks, position);
                     } else if (current.exits.Is(ChunkExit.Left, ChunkExit.Bottom)) {
                         // Left and bottom exits.
-                        InstantiateFromArray(LeftDownChunks, position);
+                        chunk = InstantiateFromArray(LeftDownChunks, position);
                     } else if (current.exits.Is(ChunkExit.Left, ChunkExit.Top)) {
                         // Left and top exits.
-                        InstantiateFromArray(LeftUpChunks, position);
+                        chunk = InstantiateFromArray(LeftUpChunks, position);
                     } else if (current.exits.Is(ChunkExit.Right, ChunkExit.Bottom)) {
                         // Right and bottom exits.
-                        InstantiateFromArray(RightDownChunks, position);
+                        chunk = InstantiateFromArray(RightDownChunks, position);
                     } else if (current.exits.Is(ChunkExit.Right, ChunkExit.Top)) {
                         // Right and top exits.
-                        InstantiateFromArray(RightUpChunks, position);
+                        chunk = InstantiateFromArray(RightUpChunks, position);
                     } else if (current.exits.Is(ChunkExit.Bottom, ChunkExit.Top)) {
                         // Bottom and top exits.
-                        InstantiateFromArray(UpDownChunks, position);
+                        chunk = InstantiateFromArray(UpDownChunks, position);
                     } else if (current.exits.Is(ChunkExit.Left, ChunkExit.Right, ChunkExit.Bottom)) {
                         // Left, right and bottom exits.
-                        InstantiateFromArray(LeftRightDownChunks, position);
+                        chunk = InstantiateFromArray(LeftRightDownChunks, position);
                     } else if (current.exits.Is(ChunkExit.Left, ChunkExit.Right, ChunkExit.Top)) {
                         // Left, right and top exits.
-                        InstantiateFromArray(LeftRightUpChunks, position);
+                        chunk = InstantiateFromArray(LeftRightUpChunks, position);
                     } else if (current.exits.Is(ChunkExit.Left, ChunkExit.Bottom, ChunkExit.Top)) {
                         // Left, bottom and top exits.
-                        InstantiateFromArray(LeftUpDownChunks, position);
+                        chunk = InstantiateFromArray(LeftUpDownChunks, position);
                     } else if (current.exits.Is(ChunkExit.Right, ChunkExit.Bottom, ChunkExit.Top)) {
                         // Right, bottom and top exits.
-                        InstantiateFromArray(RightUpDownChunks, position);
+                        chunk = InstantiateFromArray(RightUpDownChunks, position);
                     } else if (current.exits.Is(ChunkExit.Left, ChunkExit.Right, ChunkExit.Bottom, ChunkExit.Top)) {
                         // Left, right, bottom and top exits.
-                        InstantiateFromArray(LeftRightUpDownChunks, position);
+                        chunk = InstantiateFromArray(LeftRightUpDownChunks, position);
                     } else {
                         // Non-path chunks (currently impassible).
-                        InstantiateFromArray(ImpassibleChunks, position);
+                        chunk = InstantiateFromArray(ImpassibleChunks, position);
                     }
                 }
+
+                chunk.GetComponent<ChunkScript>().tileGrid = new GameObject[16, 16];
+
+                for (int i = 0; i < chunk.transform.childCount; i++) {
+                    if (chunk.transform.GetChild(i).tag == "Platform") {
+                        int x = (int)chunk.transform.GetChild(i).transform.localPosition.x;
+                        int y = (int)chunk.transform.GetChild(i).transform.localPosition.y;
+
+                        chunk.GetComponent<ChunkScript>().tileGrid[x, y] = chunk.transform.GetChild(i).gameObject;
+                    }
+                }
+
+                for (int tX = 0; tX < 16; tX++) {
+                    for (int tY = 0; tY < 16; tY++) {
+                        if (chunk.GetComponent<ChunkScript>().tileGrid[tX, tY] != null) {
+
+                            bool up = false;
+                            if(tY < 15)
+                                up = (chunk.GetComponent<ChunkScript>().tileGrid[tX, tY + 1] != null);
+                            bool down = false;
+                            if(tY > 0)
+                                down = (chunk.GetComponent<ChunkScript>().tileGrid[tX, tY - 1] != null);
+                            bool left = false;
+                            if(tX > 0)
+                                left = (chunk.GetComponent<ChunkScript>().tileGrid[tX - 1, tY] != null);
+                            bool right = false;
+                            if(tX < 15)
+                                right = (chunk.GetComponent<ChunkScript>().tileGrid[tX + 1, tY] != null);
+
+                            if (!left) {
+                                if (!right) {
+                                    if (!up) {
+                                        chunk.GetComponent<ChunkScript>().tileGrid[tX, tY].GetComponent<SpriteRenderer>().sprite = EarthSprites.Top;
+                                    } else {
+                                        if (!down) {
+                                            chunk.GetComponent<ChunkScript>().tileGrid[tX, tY].GetComponent<SpriteRenderer>().sprite = EarthSprites.PlainBottom;
+                                        } else {
+                                            chunk.GetComponent<ChunkScript>().tileGrid[tX, tY].GetComponent<SpriteRenderer>().sprite = EarthSprites.Plain;
+                                        }
+                                    }
+                                } else {
+                                    if (!up) {
+                                        chunk.GetComponent<ChunkScript>().tileGrid[tX, tY].GetComponent<SpriteRenderer>().sprite = EarthSprites.LeftTop;
+                                    } else {
+                                        chunk.GetComponent<ChunkScript>().tileGrid[tX, tY].GetComponent<SpriteRenderer>().sprite = EarthSprites.Left;
+                                    }
+                                }
+                            } else {
+                                if (!right) {
+                                    if (!up) {
+                                        chunk.GetComponent<ChunkScript>().tileGrid[tX, tY].GetComponent<SpriteRenderer>().sprite = EarthSprites.RightTop;
+                                    } else {
+                                        chunk.GetComponent<ChunkScript>().tileGrid[tX, tY].GetComponent<SpriteRenderer>().sprite = EarthSprites.Right;
+                                    }
+                                } else {
+                                    if (!up) {
+                                        chunk.GetComponent<ChunkScript>().tileGrid[tX, tY].GetComponent<SpriteRenderer>().sprite = EarthSprites.Top;
+                                    } else {
+                                        if (!down) {
+                                            chunk.GetComponent<ChunkScript>().tileGrid[tX, tY].GetComponent<SpriteRenderer>().sprite = EarthSprites.PlainBottom;
+                                        } else {
+                                            chunk.GetComponent<ChunkScript>().tileGrid[tX, tY].GetComponent<SpriteRenderer>().sprite = EarthSprites.Plain;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+
             }
         }
 

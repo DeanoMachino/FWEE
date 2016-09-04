@@ -20,7 +20,7 @@ public enum ChunkType {
     PlayerStart,        // The chunk in which the player starts.
     ItemFountain,       // A chunk which contains an item fountain.
     EnemySpawner,       // A chunk where enemies will continuously spawn.
-    EndGoal          // The chunk which contains the player's end goal.
+    EndGoal             // The chunk which contains the player's end goal.
 }
 
 public class Chunk {

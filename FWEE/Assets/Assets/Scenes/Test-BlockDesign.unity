@@ -216,12 +216,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 114000012423661306, guid: c863853f63ed3ee4ab4c62da4614ec01,
-        type: 2}
-      propertyPath: Player
-      value: 
-      objectReference: {fileID: 1000011309268058, guid: 1ea4d6c2ae6981a4595a811397b843f1,
-        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c863853f63ed3ee4ab4c62da4614ec01, type: 2}
   m_IsPrefabParent: 0
@@ -289,6 +283,14 @@ MonoBehaviour:
   EndLeftUpChunks: []
   EndRightUpChunks: []
   EndLeftRightUpChunks: []
+  EarthSprites:
+    Left: {fileID: 0}
+    LeftTop: {fileID: 0}
+    Top: {fileID: 0}
+    RightTop: {fileID: 0}
+    Right: {fileID: 0}
+    Plain: {fileID: 0}
+    PlainBottom: {fileID: 0}
 --- !u!4 &1824477245
 Transform:
   m_ObjectHideFlags: 0
@@ -366,6 +368,14 @@ MonoBehaviour:
   EndLeftUpChunks: []
   EndRightUpChunks: []
   EndLeftRightUpChunks: []
+  EarthSprites:
+    Left: {fileID: 0}
+    LeftTop: {fileID: 0}
+    Top: {fileID: 0}
+    RightTop: {fileID: 0}
+    Right: {fileID: 0}
+    Plain: {fileID: 0}
+    PlainBottom: {fileID: 0}
 --- !u!4 &1959017253
 Transform:
   m_ObjectHideFlags: 0

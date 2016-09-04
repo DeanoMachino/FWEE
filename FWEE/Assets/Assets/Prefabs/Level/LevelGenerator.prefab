@@ -57,6 +57,7 @@ MonoBehaviour:
   chunkSize:
     x: 16
     y: 16
+  Player: {fileID: 1000011309268058, guid: 1ea4d6c2ae6981a4595a811397b843f1, type: 2}
   LeftChunks:
   - {fileID: 1000014140439494, guid: 3770e960f674b22498404855ecf4656d, type: 2}
   - {fileID: 1000010069432422, guid: 3411b7a443a8a3d4c99d5a88fb7dc3bb, type: 2}
@@ -145,3 +146,11 @@ MonoBehaviour:
   - {fileID: 1000010073810026, guid: 4612f5d2f82eb6645a12b953e453ff35, type: 2}
   EndLeftRightUpChunks:
   - {fileID: 1000011935952512, guid: 98f8370b97aa3274e807993fb6122f00, type: 2}
+  EarthSprites:
+    Left: {fileID: 21300000, guid: 1950241bc71a05148ab33672b222e488, type: 3}
+    LeftTop: {fileID: 21300000, guid: 655acc2f439939343b5153b863bf1325, type: 3}
+    Top: {fileID: 21300000, guid: 59088270f10d91d40815548f37f44cd1, type: 3}
+    RightTop: {fileID: 21300000, guid: c3fb2993ddc8a3e4aad60e347472586a, type: 3}
+    Right: {fileID: 21300000, guid: c496cfcfda04a6043aac44aef0c71037, type: 3}
+    Plain: {fileID: 21300000, guid: a69c4ace6a051fc44809291d404e6bbf, type: 3}
+    PlainBottom: {fileID: 21300000, guid: aa5e1454dd60fd24e9db27276447ab1c, type: 3}

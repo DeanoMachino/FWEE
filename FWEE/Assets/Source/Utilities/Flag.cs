@@ -6,7 +6,8 @@ using System.Text;
 // Templated class to act as a flagged enum container. Allows the user to store
 // multiple enum values within one variable and perform generic operations on
 // them.
-public class Flag<T> {
+[System.Serializable]
+public class Flag<T> : Object{
     private List<T> m_flags;
 
     public Flag(params T[] flags) {

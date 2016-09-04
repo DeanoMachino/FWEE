@@ -665,6 +665,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 4000011564701388}
+  - 114: {fileID: 114000010879866520}
   m_Layer: 0
   m_Name: D03
   m_TagString: Untagged
@@ -4089,6 +4090,17 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
+--- !u!114 &114000010879866520
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011778220438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af88bcf9d73fb7b4681aeef96149bcb6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &212000010056442382
 SpriteRenderer:
   m_ObjectHideFlags: 1
