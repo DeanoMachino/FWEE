@@ -176,7 +176,7 @@ public class Enemy : MonoBehaviour {
             float ang = Random.value * 360;
             Vector3 pos;
             pos.x = center.x + radius * Mathf.Sin(ang * Mathf.Deg2Rad);
-            pos.y = center.y + radius * Mathf.Cos(ang * Mathf.Deg2Rad) + 4;
+            pos.y = center.y + radius * Mathf.Cos(ang * Mathf.Deg2Rad);
             pos.z = center.z;
 
             Quaternion rot = Quaternion.FromToRotation(Vector3.forward, center - pos);

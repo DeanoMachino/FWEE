@@ -87,6 +87,6 @@ public class HealthBar : MonoBehaviour {
     void ScaleHealth()
     {
         float scaledHealth = currentHealth / fullHealth;
-        GetComponent<RectTransform>().localScale = new Vector3 (scaledHealth, 1, 1);
+       healthBar.GetComponent<RectTransform>().localScale = new Vector3 (scaledHealth, 1, 1);
     }
 }
