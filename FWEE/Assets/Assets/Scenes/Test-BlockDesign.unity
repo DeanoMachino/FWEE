@@ -104,11 +104,11 @@ GameObject:
   - 81: {fileID: 906446309}
   m_Layer: 0
   m_Name: Camera
-  m_TagString: Untagged
+  m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!81 &906446309
 AudioListener:
   m_ObjectHideFlags: 0
@@ -150,7 +150,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 88
+  orthographic size: 10
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
@@ -176,7 +176,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
 --- !u!1001 &953487219
 Prefab:
   m_ObjectHideFlags: 0
@@ -289,7 +289,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4000012064133442, guid: c863853f63ed3ee4ab4c62da4614ec01, type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114000012423661306, guid: c863853f63ed3ee4ab4c62da4614ec01,
         type: 2}
@@ -381,206 +381,24 @@ Prefab:
       value: 
       objectReference: {fileID: 1000010212317430, guid: 13185385f70eeff429c852c630255a00,
         type: 2}
+    - target: {fileID: 114000012423661306, guid: c863853f63ed3ee4ab4c62da4614ec01,
+        type: 2}
+      propertyPath: EnemySpawner
+      value: 
+      objectReference: {fileID: 1000014030459990, guid: c97247209d4a65b41b78d44fd3274fe0,
+        type: 2}
+    - target: {fileID: 114000012423661306, guid: c863853f63ed3ee4ab4c62da4614ec01,
+        type: 2}
+      propertyPath: EnemyGameObject
+      value: 
+      objectReference: {fileID: 1000014030459990, guid: c97247209d4a65b41b78d44fd3274fe0,
+        type: 2}
+    - target: {fileID: 114000012423661306, guid: c863853f63ed3ee4ab4c62da4614ec01,
+        type: 2}
+      propertyPath: Player
+      value: 
+      objectReference: {fileID: 1000013444017592, guid: 539e09b4700a954438668f727a3e1841,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c863853f63ed3ee4ab4c62da4614ec01, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &1824477243
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 1824477245}
-  - 114: {fileID: 1824477244}
-  m_Layer: 0
-  m_Name: LevelGeneratorLine
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!114 &1824477244
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1824477243}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f29e1d87c1ae9a74ba29036f570e36ba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gridSize:
-    x: 8
-    y: 8
-  chunkSize:
-    x: 8
-    y: 8
-  Player: {fileID: 0}
-  LeftChunks: []
-  RightChunks: []
-  UpChunks: []
-  DownChunks: []
-  LeftRightChunks: []
-  LeftUpChunks: []
-  LeftDownChunks: []
-  RightUpChunks: []
-  RightDownChunks: []
-  UpDownChunks: []
-  LeftRightUpChunks: []
-  LeftRightDownChunks: []
-  LeftUpDownChunks: []
-  RightUpDownChunks: []
-  LeftRightUpDownChunks: []
-  ImpassibleChunks: []
-  StartLeftChunks: []
-  StartRightChunks: []
-  StartDownChunks: []
-  StartLeftRightChunks: []
-  StartLeftDownChunks: []
-  StartRightDownChunks: []
-  StartLeftRightDownChunks: []
-  EndLeftChunks: []
-  EndRightChunks: []
-  EndUpChunks: []
-  EndLeftRightChunks: []
-  EndLeftUpChunks: []
-  EndRightUpChunks: []
-  EndLeftRightUpChunks: []
-  FountainLeftChunks: []
-  FountainRightChunks: []
-  FountainUpChunks: []
-  FountainDownChunks: []
-  FountainLeftRightChunks: []
-  FountainLeftUpChunks: []
-  FountainLeftDownChunks: []
-  FountainRightUpChunks: []
-  FountainRightDownChunks: []
-  FountainUpDownChunks: []
-  FountainLeftRightUpChunks: []
-  FountainLeftRightDownChunks: []
-  FountainLeftUpDownChunks: []
-  FountainRightUpDownChunks: []
-  FountainLeftRightUpDownChunks: []
-  EarthSprites:
-    Left: {fileID: 0}
-    LeftTop: {fileID: 0}
-    Top: {fileID: 0}
-    RightTop: {fileID: 0}
-    Right: {fileID: 0}
-    Plain: {fileID: 0}
-    PlainBottom: {fileID: 0}
---- !u!4 &1824477245
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1824477243}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 3
---- !u!1 &1959017251
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 1959017253}
-  - 114: {fileID: 1959017252}
-  m_Layer: 0
-  m_Name: LevelGeneratorArrow
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!114 &1959017252
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1959017251}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f29e1d87c1ae9a74ba29036f570e36ba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gridSize:
-    x: 8
-    y: 8
-  chunkSize:
-    x: 8
-    y: 8
-  Player: {fileID: 0}
-  LeftChunks: []
-  RightChunks: []
-  UpChunks: []
-  DownChunks: []
-  LeftRightChunks: []
-  LeftUpChunks: []
-  LeftDownChunks: []
-  RightUpChunks: []
-  RightDownChunks: []
-  UpDownChunks: []
-  LeftRightUpChunks: []
-  LeftRightDownChunks: []
-  LeftUpDownChunks: []
-  RightUpDownChunks: []
-  LeftRightUpDownChunks: []
-  ImpassibleChunks: []
-  StartLeftChunks: []
-  StartRightChunks: []
-  StartDownChunks: []
-  StartLeftRightChunks: []
-  StartLeftDownChunks: []
-  StartRightDownChunks: []
-  StartLeftRightDownChunks: []
-  EndLeftChunks: []
-  EndRightChunks: []
-  EndUpChunks: []
-  EndLeftRightChunks: []
-  EndLeftUpChunks: []
-  EndRightUpChunks: []
-  EndLeftRightUpChunks: []
-  FountainLeftChunks: []
-  FountainRightChunks: []
-  FountainUpChunks: []
-  FountainDownChunks: []
-  FountainLeftRightChunks: []
-  FountainLeftUpChunks: []
-  FountainLeftDownChunks: []
-  FountainRightUpChunks: []
-  FountainRightDownChunks: []
-  FountainUpDownChunks: []
-  FountainLeftRightUpChunks: []
-  FountainLeftRightDownChunks: []
-  FountainLeftUpDownChunks: []
-  FountainRightUpDownChunks: []
-  FountainLeftRightUpDownChunks: []
-  EarthSprites:
-    Left: {fileID: 0}
-    LeftTop: {fileID: 0}
-    Top: {fileID: 0}
-    RightTop: {fileID: 0}
-    Right: {fileID: 0}
-    Plain: {fileID: 0}
-    PlainBottom: {fileID: 0}
---- !u!4 &1959017253
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1959017251}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 0

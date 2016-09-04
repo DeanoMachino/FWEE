@@ -68,6 +68,7 @@ public class LevelGenerator : MonoBehaviour {
     public GameObject[] FountainRightUpDownChunks;         //3
     public GameObject[] FountainLeftRightUpDownChunks;     //4
 
+    public GameObject EnemySpawner;
 
     public SpriteSet EarthSprites;
 
@@ -166,12 +167,21 @@ public class LevelGenerator : MonoBehaviour {
             while (!fountainSet) {
                 foreach (Chunk c in level.chunkGrid) {
                     if (c.types.HasFlag(ChunkType.Path) && !c.types.HasFlag(ChunkType.PlayerStart) && !c.types.HasFlag(ChunkType.EndGoal) && !c.types.HasFlag(ChunkType.ItemFountain) && !c.types.HasFlag(ChunkType.EnemySpawner)) {
-                        if (Random.value > 0.99f) {
+                        if (Random.value < 0.01f) {
                             c.types.Add(ChunkType.ItemFountain);
                             fountainSet = true;
                             break;
                         }
                     }
+                }
+            }
+        }
+
+        // Set enemy spawners.
+        foreach (Chunk c in level.chunkGrid) {
+            if (c.types.HasFlag(ChunkType.Path) && !c.types.HasFlag(ChunkType.PlayerStart) && !c.types.HasFlag(ChunkType.EndGoal) && !c.types.HasFlag(ChunkType.ItemFountain) && !c.types.HasFlag(ChunkType.EnemySpawner)) {
+                if (Random.value < 0.2f) {
+                    c.types.Add(ChunkType.EnemySpawner);
                 }
             }
         }
@@ -346,6 +356,18 @@ public class LevelGenerator : MonoBehaviour {
                         chunk = InstantiateFromArray(ImpassibleChunks, position);
                     }
                 }
+
+                if (current.types.HasFlag(ChunkType.EnemySpawner)) {
+                    chunk.transform.Find("EnemySpawner").GetComponent<EnemySpawner>().Enemy = EnemySpawner.GetComponent<EnemySpawner>().Enemy;
+                    chunk.transform.Find("EnemySpawner").GetComponent<EnemySpawner>().spawnChance = EnemySpawner.GetComponent<EnemySpawner>().spawnChance;
+                    chunk.transform.Find("EnemySpawner").GetComponent<EnemySpawner>().spawnDelay = EnemySpawner.GetComponent<EnemySpawner>().spawnDelay;
+                    chunk.transform.Find("EnemySpawner").GetComponent<EnemySpawner>().spawnLimit = EnemySpawner.GetComponent<EnemySpawner>().spawnLimit;
+                } else {
+                    if (chunk.transform.Find("EnemySpawner") != null) {
+                        chunk.transform.Find("EnemySpawner").gameObject.SetActive(false);
+                    }
+                }
+
 
                 chunk.GetComponent<ChunkScript>().tileGrid = new GameObject[16, 16];
 

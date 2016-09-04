@@ -70,6 +70,7 @@
     <Compile Include="Assets\Source\LevelGeneration\Block.cs" />
     <Compile Include="Assets\Source\LevelGeneration\Chunk.cs" />
     <Compile Include="Assets\Source\LevelGeneration\ChunkScript.cs" />
+    <Compile Include="Assets\Source\LevelGeneration\EnemySpawner.cs" />
     <Compile Include="Assets\Source\LevelGeneration\FountainScript.cs" />
     <Compile Include="Assets\Source\LevelGeneration\Level.cs" />
     <Compile Include="Assets\Source\LevelGeneration\LevelGenerator.cs" />
