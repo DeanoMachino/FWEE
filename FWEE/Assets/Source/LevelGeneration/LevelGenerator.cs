@@ -225,7 +225,7 @@ public class LevelGenerator : MonoBehaviour {
                     }
 
                     // Spawn player
-                    GameObject player = Instantiate(Player, chunk.transform.FindChild("StartPoint").transform.position, Quaternion.identity) as GameObject;
+                    GameManager.Instance.Player = Instantiate(Player, chunk.transform.FindChild("StartPoint").transform.position, Quaternion.identity) as GameObject;
                     
                 } else if (current.types.HasFlag(ChunkType.EndGoal)) {
                     // If the chunk is the end goal.

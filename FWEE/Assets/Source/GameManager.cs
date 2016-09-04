@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour {
     public AudioClip fireMusic;
     public AudioClip electricMusic;
 
+    public GameObject Player;
+
 	// Use this for initialization
 	void Start () {
         GameObject music = new GameObject("Music");
@@ -38,7 +40,7 @@ public class GameManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+	    
 	}
 
     void Awake() {
