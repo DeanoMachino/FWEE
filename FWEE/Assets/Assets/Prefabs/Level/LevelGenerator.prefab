@@ -57,7 +57,7 @@ MonoBehaviour:
   chunkSize:
     x: 16
     y: 16
-  Player: {fileID: 1000011309268058, guid: 1ea4d6c2ae6981a4595a811397b843f1, type: 2}
+  Player: {fileID: 1000013444017592, guid: 539e09b4700a954438668f727a3e1841, type: 2}
   LeftChunks:
   - {fileID: 1000014140439494, guid: 3770e960f674b22498404855ecf4656d, type: 2}
   - {fileID: 1000010069432422, guid: 3411b7a443a8a3d4c99d5a88fb7dc3bb, type: 2}
@@ -146,11 +146,43 @@ MonoBehaviour:
   - {fileID: 1000010073810026, guid: 4612f5d2f82eb6645a12b953e453ff35, type: 2}
   EndLeftRightUpChunks:
   - {fileID: 1000011935952512, guid: 98f8370b97aa3274e807993fb6122f00, type: 2}
+  FountainLeftChunks:
+  - {fileID: 1000010166423256, guid: da4ef42782959e6428821fc18678d25f, type: 2}
+  FountainRightChunks:
+  - {fileID: 1000013864152362, guid: faeea2c1d8b7b6f4ca8d54c5fc2bced0, type: 2}
+  FountainUpChunks:
+  - {fileID: 1000010236135046, guid: ac29b2024f054bc4c9bea06630cc46e3, type: 2}
+  FountainDownChunks:
+  - {fileID: 1000011508802964, guid: c89dd75337b1a614bb3f45b56821f574, type: 2}
+  FountainLeftRightChunks:
+  - {fileID: 1000012427921360, guid: 195266441110879428faee4a34919bdf, type: 2}
+  FountainLeftUpChunks:
+  - {fileID: 1000011125157298, guid: a48f05773e1254d499626fe156025d54, type: 2}
+  FountainLeftDownChunks:
+  - {fileID: 1000012250710572, guid: 34a5972d7fc7e304c9a3fa603ea19f84, type: 2}
+  FountainRightUpChunks:
+  - {fileID: 1000012416325448, guid: 7c74702c56f90de4ea7736a060dc6357, type: 2}
+  FountainRightDownChunks:
+  - {fileID: 1000013758711160, guid: d65518943231af440a0a16e365a34e4e, type: 2}
+  FountainUpDownChunks:
+  - {fileID: 1000010749049382, guid: 8f54ca7e49db4c04aba3aaefdb278df6, type: 2}
+  FountainLeftRightUpChunks:
+  - {fileID: 1000010422981078, guid: 097948b06326dbb45acbdb33705510a5, type: 2}
+  FountainLeftRightDownChunks:
+  - {fileID: 1000014141377336, guid: 3fae91703ed630d429a8a121735b4959, type: 2}
+  FountainLeftUpDownChunks:
+  - {fileID: 1000013876318886, guid: db521dd238f64ca4fb46f01ef1e0570d, type: 2}
+  FountainRightUpDownChunks:
+  - {fileID: 1000013023648488, guid: debd340881bc05b45af33c4f8096c7d8, type: 2}
+  FountainLeftRightUpDownChunks:
+  - {fileID: 1000010212317430, guid: 13185385f70eeff429c852c630255a00, type: 2}
+  EnemySpawner: {fileID: 1000014030459990, guid: c97247209d4a65b41b78d44fd3274fe0,
+    type: 2}
   EarthSprites:
-    Left: {fileID: 21300000, guid: 1950241bc71a05148ab33672b222e488, type: 3}
+    Left: {fileID: 21300000, guid: bb777ed7a9274e4458cfaa668862a833, type: 3}
     LeftTop: {fileID: 21300000, guid: 655acc2f439939343b5153b863bf1325, type: 3}
     Top: {fileID: 21300000, guid: 59088270f10d91d40815548f37f44cd1, type: 3}
     RightTop: {fileID: 21300000, guid: c3fb2993ddc8a3e4aad60e347472586a, type: 3}
-    Right: {fileID: 21300000, guid: c496cfcfda04a6043aac44aef0c71037, type: 3}
+    Right: {fileID: 21300000, guid: 588a95bb398e8cc42a33e8d14af3c599, type: 3}
     Plain: {fileID: 21300000, guid: a69c4ace6a051fc44809291d404e6bbf, type: 3}
-    PlainBottom: {fileID: 21300000, guid: aa5e1454dd60fd24e9db27276447ab1c, type: 3}
+    PlainBottom: {fileID: 21300000, guid: a69c4ace6a051fc44809291d404e6bbf, type: 3}

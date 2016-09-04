@@ -303,7 +303,7 @@ public class LevelGenerator : MonoBehaviour {
                         Debug.Log("Fountain chunk error");
                     }
 
-                    chunk.transform.Find("Fountain").GetComponent<FountainScript>().SetFountainType(FountainType.Water);
+                    chunk.transform.Find("Fountain").GetComponent<FountainScript>().SetFountainType(FountainType.Earth);
                 } else {
                     // Place chunks based on their exits.
                     if (current.exits.Is(ChunkExit.Left)) {
