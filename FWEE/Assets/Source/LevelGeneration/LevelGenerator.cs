@@ -176,6 +176,7 @@ public class LevelGenerator : MonoBehaviour {
                 }
             }
         }
+        int fountainsInstantiated = 0;
 
         // Set enemy spawners.
         foreach (Chunk c in level.chunkGrid) {
@@ -302,8 +303,21 @@ public class LevelGenerator : MonoBehaviour {
                     } else {
                         Debug.Log("Fountain chunk error");
                     }
-
-                    chunk.transform.Find("Fountain").GetComponent<FountainScript>().SetFountainType(FountainType.Earth);
+                    switch (fountainsInstantiated) {
+                        case 0:
+                            chunk.transform.Find("Fountain").GetComponent<FountainScript>().SetFountainType(FountainType.Earth);
+                            break;
+                        case 1:
+                            chunk.transform.Find("Fountain").GetComponent<FountainScript>().SetFountainType(FountainType.Water);
+                            break;
+                        case 2:
+                            chunk.transform.Find("Fountain").GetComponent<FountainScript>().SetFountainType(FountainType.Fire);
+                            break;
+                        case 3:
+                            chunk.transform.Find("Fountain").GetComponent<FountainScript>().SetFountainType(FountainType.Electric);
+                            break;
+                    }
+                    fountainsInstantiated++;
                 } else {
                     // Place chunks based on their exits.
                     if (current.exits.Is(ChunkExit.Left)) {
