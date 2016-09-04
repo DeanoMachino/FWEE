@@ -34,11 +34,14 @@ public class Enemy : MonoBehaviour {
         animator = GetComponent<Animator>();
         animator.SetBool("Moving", walking);
         chasing = false;
-	}
+        //body.constraints = RigidbodyConstraints2D.FreezeRotation;
+    }
 	
 	// Update is called once per frame
 	void FixedUpdate ()
     {
+        
+
         currentVelocity = body.velocity.magnitude;
         if (!chasing)
         {
@@ -91,10 +94,7 @@ public class Enemy : MonoBehaviour {
         {
             Collider2D collider = col.collider;
             
-            bool collideFromLeft;
-            bool collideFromTop;
-            bool collideFromRight;
-            bool collideFromBottom;
+           
             float rectWidth = this.GetComponent<Collider2D>().bounds.size.x;
             float rectHeight = this.GetComponent<Collider2D>().bounds.size.y;
             Vector3 playerCenter = this.GetComponent<Collider2D>().bounds.center;
@@ -104,35 +104,6 @@ public class Enemy : MonoBehaviour {
                 Vector3 contactPoint = col.contacts[0].point;
                 Vector3 center = collider.bounds.center;
 
-
-            /*if (contactPoint.y > center.y && //checks that circle is on top of rectangle
-                (contactPoint.x < center.x + rectWidth / 2 && contactPoint.x > center.x - rectWidth / 2))
-            {
-                collideFromTop = true;
-                Debug.Log("hit from up");
-            }
-            else if (contactPoint.y < center.y &&
-                (contactPoint.x < center.x + rectWidth / 2 && contactPoint.x > center.x - rectWidth / 2))
-            {
-                collideFromBottom = true;
-                Debug.Log("hit from down");
-            }
-            else if (contactPoint.x > center.x &&
-                (contactPoint.y < center.y + RectHeight / 2 && contactPoint.y > center.y - RectHeight / 2))
-            {
-                collideFromRight = true;
-                movingLeft = false;
-                Debug.Log("hit from right");
-            ///transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
-            }
-            else if (contactPoint.x < center.x &&
-                (contactPoint.y < center.y + RectHeight / 2 && contactPoint.y > center.y - RectHeight / 2))
-            {
-                collideFromLeft = true;
-            Debug.Log("hit from left");
-            movingLeft = true;
-                ///transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);  
-            }*/
             float cp = contactPoint.y;
             float pc = playerCenter.y;
             float l = (rectHeight / 2);
@@ -154,23 +125,7 @@ public class Enemy : MonoBehaviour {
                 }
             }
 
-            /*if(contactPoint.y == (center.y + (collider.bounds.size.y / 2)))
-            {
-             
-                if (contactPoint.x < playerCenter.x)
-                {
-                    movingLeft = false;
-
-                }
-                else
-                {
-                    movingLeft = true;
-                }
-            }
-            else
-            {
-               
-            }*/
+        
 
 
 

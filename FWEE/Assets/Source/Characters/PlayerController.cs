@@ -21,6 +21,9 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
+    Animator animator {  get { return GetComponent<Animator>(); } }
+    bool walking;
+
     // TODO: Update this to a proper state system. -Dean
     public PlayerState directionFacing = PlayerState.Left;
     public float movementSpeedOnGround = 6f;
@@ -38,6 +41,8 @@ public class PlayerController : MonoBehaviour {
     Vector3 rightFrontArmRestPosition = new Vector3(-0.45f, -0.2f, 0);
     Vector3 frontLegRestPosition = new Vector3(0.4f, -0.8f, 0);
     Vector3 backLegRestPosition = new Vector3(-0.3f, -0.8f, 0);
+
+
 
     // Returns whether the player is on the ground.
     // NOTE: This works for flat pieces of ground but will not work for slopes. -Dean
@@ -64,12 +69,15 @@ public class PlayerController : MonoBehaviour {
 
     // Use this for initialization.
     void Start() {
-        ResetBodyPartPositions();
+        //ResetBodyPartPositions();
+        Rigidbody.constraints = RigidbodyConstraints2D.FreezeRotation;
     }
 
     // Update is called once per frame.
     void Update() {
         UpdateDirection();
+        Camera.main.transform.position = transform.position;
+
 
         // Move the player left.
         if (Input.GetKey(KeyCode.A)) {
@@ -92,17 +100,27 @@ public class PlayerController : MonoBehaviour {
 
         // Make the player jump.
         if (Input.GetKeyDown(KeyCode.Space)) {
-            Jump();
+            if (IsGrounded)
+            {
+                animator.SetTrigger("Jump");
+            }
+            //Jump();
         }
 
+        if(Input.GetMouseButtonDown(0) && Input.GetMouseButtonDown(1))
+        {
+            animator.SetTrigger("DoublePunch");
+        }
         // Make the player attack with left arm.
-        if (Input.GetMouseButtonDown(0)) {
-            Attack(PlayerState.Left);
+       else if (Input.GetMouseButtonDown(0)) {
+            //Attack(PlayerState.Left);
+            animator.SetTrigger("LeftPunch");
         }
 
         // Make the player attack with right arm.
-        if (Input.GetMouseButtonDown(1)) {
-            Attack(PlayerState.Right);
+       else if (Input.GetMouseButtonDown(1)) {
+            //Attack(PlayerState.Right);
+            animator.SetTrigger("RightPunch");
         }
 
 
@@ -195,13 +213,21 @@ public class PlayerController : MonoBehaviour {
         if(Input.GetKeyDown(KeyCode.A)) {
             directionFacing = PlayerState.Left;
 
-            ResetBodyPartPositions();
+            walking = true;
+            //ResetBodyPartPositions();
         }
-        if (Input.GetKeyDown(KeyCode.D)) {
+        else if (Input.GetKeyDown(KeyCode.D)) {
             directionFacing = PlayerState.Right;
 
-            ResetBodyPartPositions();
+            walking = true;
+            //ResetBodyPartPositions();
         }
+        else
+        {
+            walking = false;
+        }
+
+        animator.SetBool("Moving", walking);
     }
 
     void ResetBodyPartPositions() {
