@@ -26,6 +26,8 @@ public class Enemy : MonoBehaviour {
 
     public float currentVelocity;
 
+    public GameObject orb;
+
 	// Use this for initialization
 	void Start ()
     {
@@ -161,4 +163,27 @@ public class Enemy : MonoBehaviour {
         punching = false;
     }
 
+    public void Die()
+    {
+        int noOrbs = Random.RandomRange(3, 10);
+        int radius = 1; //noOrbs * 1 ; 
+        Vector3 center = transform.position;
+
+        
+        for (int i = 0; i < noOrbs; i++)
+        {
+            
+            float ang = Random.value * 360;
+            Vector3 pos;
+            pos.x = center.x + radius * Mathf.Sin(ang * Mathf.Deg2Rad);
+            pos.y = center.y + radius * Mathf.Cos(ang * Mathf.Deg2Rad) + 4;
+            pos.z = center.z;
+
+            Quaternion rot = Quaternion.FromToRotation(Vector3.forward, center - pos);
+            Instantiate(orb, pos, rot);
+
+        }
+
+        Destroy(gameObject);
+    }
 }

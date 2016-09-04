@@ -34,7 +34,7 @@ public class PlayerController : MonoBehaviour {
     float attackTimeout = 0f;
 
 
-
+    bool punching = false;
 
 
     // Returns whether the player is on the ground.
@@ -218,4 +218,30 @@ public class PlayerController : MonoBehaviour {
             attackTimeout = attackDelay;
         }
     }
+
+    void StartPunching()
+    {
+        punching = true;
+    }
+
+    void StopPunching()
+    {
+        punching = false;
+    }
+
+    void OnTriggerEnter2D(Collider2D col)
+    {
+
+     
+        if (col.gameObject.tag == "Enemy")
+        {
+            
+            if (punching)
+            {
+                col.gameObject.GetComponentInChildren<HealthBar>().TakeDamage(30);
+            }
+        }
+    }
+
+
 }
