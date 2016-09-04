@@ -76,6 +76,7 @@
     <Compile Include="Assets\Source\LevelGeneration\LevelGenerator.cs" />
     <Compile Include="Assets\Source\StartSceneManager.cs" />
     <Compile Include="Assets\Source\Utilities\Flag.cs" />
+    <Compile Include="Assets\Source\Utilities\HealthBar.cs" />
     <Compile Include="Assets\Source\Utilities\Vector2i.cs" />
     <Compile Include="Assets\SpritesAndBones\Scripts\AnimationWindowUtils.cs" />
     <Compile Include="Assets\SpritesAndBones\Scripts\Bone.cs" />

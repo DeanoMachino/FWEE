@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Platform
   - PlayerArm
+  - Enemy
+  - Orb
   layers:
   - Default
   - TransparentFX
