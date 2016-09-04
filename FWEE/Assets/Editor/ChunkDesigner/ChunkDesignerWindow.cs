@@ -13,12 +13,14 @@ public class ChunkDesignerWindow : EditorWindow {
     GameObject tileGameObject;
 
     bool chunkDesignerGroup;
-    bool drawTool;
     bool[,] chunkGrid;
     bool leftExit;
     bool rightExit;
     bool topExit;
     bool bottomExit;
+    bool startChunk;
+    bool endChunk;
+    bool fountainChunk;
     bool clearAfter;
 
     bool createdChunksGroup;
@@ -89,22 +91,27 @@ public class ChunkDesignerWindow : EditorWindow {
 
     void ChunkDesigner() {
         // Prefab details
-        EditorGUILayout.BeginVertical();
-        {
-            leftExit = EditorGUILayout.Toggle("Left Exit", leftExit);
-            rightExit = EditorGUILayout.Toggle("Right Exit", rightExit);
-            topExit = EditorGUILayout.Toggle("Top Exit", topExit);
-            bottomExit = EditorGUILayout.Toggle("Bottom Exit", bottomExit);
-            EditorGUILayout.Space();
-        }
-        EditorGUILayout.EndVertical();
-
-        // Chunk Designer Tools
         EditorGUILayout.BeginHorizontal();
         {
-            drawTool = GUILayout.Toggle(drawTool, "Draw tool");
+            EditorGUILayout.BeginVertical();
+            {
+                leftExit = EditorGUILayout.Toggle("Left Exit", leftExit);
+                rightExit = EditorGUILayout.Toggle("Right Exit", rightExit);
+                topExit = EditorGUILayout.Toggle("Top Exit", topExit);
+                bottomExit = EditorGUILayout.Toggle("Bottom Exit", bottomExit);
+                EditorGUILayout.Space();
+            }
+            EditorGUILayout.EndVertical();
+            EditorGUILayout.BeginVertical();
+            {
+                startChunk = EditorGUILayout.Toggle("Start Chunk", startChunk);
+                endChunk = EditorGUILayout.Toggle("End Chunk", endChunk);
+                fountainChunk = EditorGUILayout.Toggle("Fountain Chunk", fountainChunk);
+            }
+            EditorGUILayout.EndVertical();
         }
         EditorGUILayout.EndHorizontal();
+
         // Chunk Tile grid
         EditorGUILayout.Space();
 
@@ -218,6 +225,14 @@ public class ChunkDesignerWindow : EditorWindow {
     string GetName() {
         string name = "";
 
+        if (startChunk) {
+            name += "Start";
+        } else if (endChunk) {
+            name += "End";
+        } else if (fountainChunk) {
+            name += "Fountain";
+        }
+
         if (leftExit) {
             name += "L";
         }
@@ -263,32 +278,49 @@ public class ChunkDesignerWindow : EditorWindow {
             connections++;
         }
 
-        switch (connections) {
-            case 0:
-                //error
-                break;
-            case 1:
-                path += "1 Connection/";
-                break;
-            case 2:
-                path += "2 Connections/";
-                break;
-            case 3:
-                path += "3 Connections/";
-                break;
-            case 4:
-                path += "4 Connections/";
-                break;
-        }
+        if (startChunk || endChunk || fountainChunk) {
+            path += "SpecialChunks/";
 
-        if (left) {
-            path += "L";
-        }if (right) {
-            path += "R";
-        }if (up) {
-            path += "U";
-        }if (down) {
-            path += "D";
+            if (startChunk) {
+                path += "Start";
+            } else if (endChunk) {
+                path += "End";
+            } else if (fountainChunk) {
+                path += "Fountain";
+            }
+
+        } else {
+
+            switch (connections) {
+                case 0:
+                    //error
+                    break;
+                case 1:
+                    path += "1 Connection/";
+                    break;
+                case 2:
+                    path += "2 Connections/";
+                    break;
+                case 3:
+                    path += "3 Connections/";
+                    break;
+                case 4:
+                    path += "4 Connections/";
+                    break;
+            }
+
+            if (left) {
+                path += "L";
+            }
+            if (right) {
+                path += "R";
+            }
+            if (up) {
+                path += "U";
+            }
+            if (down) {
+                path += "D";
+            }
         }
 
         path += "/" + name + ".prefab";
