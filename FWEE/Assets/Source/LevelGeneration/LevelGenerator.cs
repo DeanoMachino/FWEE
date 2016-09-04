@@ -52,6 +52,23 @@ public class LevelGenerator : MonoBehaviour {
     public GameObject[] EndRightUpChunks;
     public GameObject[] EndLeftRightUpChunks;
 
+    public GameObject[] FountainLeftChunks;                //1
+    public GameObject[] FountainRightChunks;               //1
+    public GameObject[] FountainUpChunks;                  //1
+    public GameObject[] FountainDownChunks;                //1
+    public GameObject[] FountainLeftRightChunks;           //2
+    public GameObject[] FountainLeftUpChunks;              //2
+    public GameObject[] FountainLeftDownChunks;            //2
+    public GameObject[] FountainRightUpChunks;             //2
+    public GameObject[] FountainRightDownChunks;           //2
+    public GameObject[] FountainUpDownChunks;              //2
+    public GameObject[] FountainLeftRightUpChunks;         //3
+    public GameObject[] FountainLeftRightDownChunks;       //3
+    public GameObject[] FountainLeftUpDownChunks;          //3
+    public GameObject[] FountainRightUpDownChunks;         //3
+    public GameObject[] FountainLeftRightUpDownChunks;     //4
+
+
     public SpriteSet EarthSprites;
 
     Vector2i startChunk;
@@ -143,6 +160,22 @@ public class LevelGenerator : MonoBehaviour {
             }
         }
 
+        // Set fountains.
+        for (int i = 0; i < 4; i++) {
+            bool fountainSet = false;
+            while (!fountainSet) {
+                foreach (Chunk c in level.chunkGrid) {
+                    if (c.types.HasFlag(ChunkType.Path) && !c.types.HasFlag(ChunkType.PlayerStart) && !c.types.HasFlag(ChunkType.EndGoal) && !c.types.HasFlag(ChunkType.ItemFountain) && !c.types.HasFlag(ChunkType.EnemySpawner)) {
+                        if (Random.value > 0.99f) {
+                            c.types.Add(ChunkType.ItemFountain);
+                            fountainSet = true;
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+
         // Instantiate chunks based on their type and their exits.
         // TODO: Move into its own method. -Dean
         for (int gX = 0; gX < level.chunkGrid.GetLength(0); gX++) {
@@ -155,7 +188,6 @@ public class LevelGenerator : MonoBehaviour {
 
                 if (current.types.HasFlag(ChunkType.PlayerStart)) {
                     // If the chunk is the player start.
-
                     if (current.exits.Is(ChunkExit.Left)) {
                         // Left exit only.
                         chunk = InstantiateFromArray(StartLeftChunks, position);
@@ -186,7 +218,6 @@ public class LevelGenerator : MonoBehaviour {
                     
                 } else if (current.types.HasFlag(ChunkType.EndGoal)) {
                     // If the chunk is the end goal.
-                    // If the chunk is the player start.
                     if (current.exits.Is(ChunkExit.Left)) {
                         // Left exit only.
                         chunk = InstantiateFromArray(EndLeftChunks, position);
@@ -211,6 +242,58 @@ public class LevelGenerator : MonoBehaviour {
                     } else {
                         Debug.Log("End chunk error");
                     }
+                } else if (current.types.HasFlag(ChunkType.ItemFountain)) {
+                    // If chunk is an item fountain.
+                    if (current.exits.Is(ChunkExit.Left)) {
+                        // Left exit only.
+                        chunk = InstantiateFromArray(FountainLeftChunks, position);
+                    } else if (current.exits.Is(ChunkExit.Right)) {
+                        // Right exit only.
+                        chunk = InstantiateFromArray(FountainRightChunks, position);
+                    } else if (current.exits.Is(ChunkExit.Bottom)) {
+                        // Bottom exit only.
+                        chunk = InstantiateFromArray(FountainDownChunks, position);
+                    } else if (current.exits.Is(ChunkExit.Top)) {
+                        // Top exit only.
+                        chunk = InstantiateFromArray(FountainUpChunks, position);
+                    } else if (current.exits.Is(ChunkExit.Left, ChunkExit.Right)) {
+                        // Left and right exits.
+                        chunk = InstantiateFromArray(FountainLeftRightChunks, position);
+                    } else if (current.exits.Is(ChunkExit.Left, ChunkExit.Bottom)) {
+                        // Left and bottom exits.
+                        chunk = InstantiateFromArray(FountainLeftDownChunks, position);
+                    } else if (current.exits.Is(ChunkExit.Left, ChunkExit.Top)) {
+                        // Left and top exits.
+                        chunk = InstantiateFromArray(FountainLeftUpChunks, position);
+                    } else if (current.exits.Is(ChunkExit.Right, ChunkExit.Bottom)) {
+                        // Right and bottom exits.
+                        chunk = InstantiateFromArray(FountainRightDownChunks, position);
+                    } else if (current.exits.Is(ChunkExit.Right, ChunkExit.Top)) {
+                        // Right and top exits.
+                        chunk = InstantiateFromArray(FountainRightUpChunks, position);
+                    } else if (current.exits.Is(ChunkExit.Bottom, ChunkExit.Top)) {
+                        // Bottom and top exits.
+                        chunk = InstantiateFromArray(FountainUpDownChunks, position);
+                    } else if (current.exits.Is(ChunkExit.Left, ChunkExit.Right, ChunkExit.Bottom)) {
+                        // Left, right and bottom exits.
+                        chunk = InstantiateFromArray(FountainLeftRightDownChunks, position);
+                    } else if (current.exits.Is(ChunkExit.Left, ChunkExit.Right, ChunkExit.Top)) {
+                        // Left, right and top exits.
+                        chunk = InstantiateFromArray(FountainLeftRightUpChunks, position);
+                    } else if (current.exits.Is(ChunkExit.Left, ChunkExit.Bottom, ChunkExit.Top)) {
+                        // Left, bottom and top exits.
+                        chunk = InstantiateFromArray(FountainLeftUpDownChunks, position);
+                    } else if (current.exits.Is(ChunkExit.Right, ChunkExit.Bottom, ChunkExit.Top)) {
+                        // Right, bottom and top exits.
+                        chunk = InstantiateFromArray(FountainRightUpDownChunks, position);
+                    } else if (current.exits.Is(ChunkExit.Left, ChunkExit.Right, ChunkExit.Bottom, ChunkExit.Top)) {
+                        // Left, right, bottom and top exits.
+                        chunk = InstantiateFromArray(FountainLeftRightUpDownChunks, position);
+                    } else {
+                        Debug.Log("Fountain chunk error");
+                    }
+
+                    chunk.transform.Find("Fountain").GetComponent<FountainScript>().SetFountainType(FountainType.Water);
                 } else {
                     // Place chunks based on their exits.
                     if (current.exits.Is(ChunkExit.Left)) {
