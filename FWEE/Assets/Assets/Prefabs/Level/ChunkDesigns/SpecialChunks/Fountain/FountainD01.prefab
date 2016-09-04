@@ -973,6 +973,7 @@ GameObject:
   - 4: {fileID: 4000011994521800}
   - 212: {fileID: 212000013298189688}
   - 114: {fileID: 114000011184696856}
+  - 61: {fileID: 61000012178805756}
   m_Layer: 0
   m_Name: Fountain
   m_TagString: Untagged
@@ -4595,6 +4596,20 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
+--- !u!61 &61000012178805756
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012100351492}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Size: {x: 4, y: 3.5953078}
 --- !u!61 &61000012182274382
 BoxCollider2D:
   m_ObjectHideFlags: 1
