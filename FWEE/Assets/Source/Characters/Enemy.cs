@@ -106,7 +106,8 @@ public class Enemy : MonoBehaviour {
             float l = (rectHeight / 2);
             //Debug.Log("platform hit CP:" + contactPoint.y.ToString() + " PC:" + playerCenter.y.ToString() + " L:" + (rectHeight/2) + " PC - L:" + (pc - l).ToString() );
 
-            if((pc - l) + 0.1 > cp &&  (pc - l) - 0.1 < cp )
+            //if((pc - l) + 0.1 > cp &&  (pc - l) - 0.1 < cp )
+            if(cp < pc - l)
             {
                 
             }
@@ -181,7 +182,6 @@ public class Enemy : MonoBehaviour {
 
             Quaternion rot = Quaternion.FromToRotation(Vector3.forward, center - pos);
             Instantiate(orb, pos, rot);
-
         }
 
         Destroy(gameObject);

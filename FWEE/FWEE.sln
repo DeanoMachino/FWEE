@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
+# Visual Studio 2015
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FWEE.CSharp", "FWEE.CSharp.csproj", "{B00DAC5B-8A25-1B44-2C98-EEFDEDA2F8FD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FWEE.CSharp.Editor", "FWEE.CSharp.Editor.csproj", "{5A0964F2-A350-8AD1-00AA-EA0CEC55C81A}"

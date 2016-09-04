@@ -834,7 +834,7 @@ GameObject:
   - 61: {fileID: 61000010556844938}
   m_Layer: 0
   m_Name: Fountain
-  m_TagString: Untagged
+  m_TagString: Foutain
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

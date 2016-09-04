@@ -37,13 +37,13 @@ public class HealthBar : MonoBehaviour {
     public void TakeDamage(float damage)
     {
         desiredHealth -= damage;
-        Debug.Log("health updated");
+       
         if(desiredHealth < 0 )
         {
-            Debug.Log("tried to destroy");
+            
            if(destroyWhenZero)
             {
-                Destroy(gameObject.transform.parent.gameObject.transform.parent.gameObject);
+                
                 
             }
         }
