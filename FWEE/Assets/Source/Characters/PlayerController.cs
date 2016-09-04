@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public enum PlayerState {
     Left,
@@ -19,7 +20,10 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
-    AudioSource audioSource; 
+    AudioSource audioSource;
+    public AudioClip pickOrb;
+    public AudioClip pickStone;
+
     Skeleton skeleton { get { return this.GetComponentInChildren<Skeleton>(); } }
    
     Animator animator {  get { return GetComponent<Animator>(); } }
@@ -251,6 +255,19 @@ public class PlayerController : MonoBehaviour {
                 punching = false;
             }
         }
+
+        if (col.tag == "Foutain")
+        {
+            if(orbManaCount > 5)
+            {
+                orbManaCount =- 5;
+            }
+        }
+
+        if(col.tag == "Stone")
+        {
+            SceneManager.LoadScene(3);
+        }
     }
     void OnCollisionEnter2D(Collision2D col)
     {
@@ -258,7 +275,8 @@ public class PlayerController : MonoBehaviour {
         {
             Destroy(col.gameObject);
             orbManaCount++;
-            //play sound
+            audioSource.clip = pickOrb;
+            audioSource.Play();
         }
     }
 

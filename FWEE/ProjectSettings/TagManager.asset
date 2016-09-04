@@ -8,6 +8,8 @@ TagManager:
   - PlayerArm
   - Enemy
   - Orb
+  - Foutain
+  - Stone
   layers:
   - Default
   - TransparentFX
