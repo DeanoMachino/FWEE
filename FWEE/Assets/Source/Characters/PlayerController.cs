@@ -248,9 +248,10 @@ public class PlayerController : MonoBehaviour {
      
         if (col.gameObject.tag == "Enemy")
         {
-            
+            Debug.Log("enemy hit");
             if (punching)
             {
+                Debug.Log("hit confirmed");
                 col.gameObject.GetComponentInChildren<HealthBar>().TakeDamage(30);
                 punching = false;
             }
