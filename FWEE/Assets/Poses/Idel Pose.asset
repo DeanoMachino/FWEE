@@ -1,0 +1,75 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93109f8fe8967c44090ea6abc3211492, type: 3}
+  m_Name: Idel Pose
+  m_EditorClassIdentifier: 
+  rotations:
+  - name: BackBone
+    rotation: {x: 0, y: 0, z: 0.02540402, w: -0.9996773}
+  - name: ArmUpperBone_L
+    rotation: {x: 0, y: 0, z: 0.96208036, w: 0.27276623}
+  - name: ArmLowerBone_L
+    rotation: {x: 0, y: 0, z: 0.6762181, w: 0.7367015}
+  - name: ArmUpperBone_R
+    rotation: {x: 0, y: 0, z: 0.95809704, w: -0.28644398}
+  - name: ArmLowerBone_R
+    rotation: {x: 0, y: 0, z: 0.064480945, w: 0.99791896}
+  - name: LegUpperBone_L
+    rotation: {x: 0, y: 0, z: 0.9997846, w: -0.020756109}
+  - name: LegLowerBone_L
+    rotation: {x: 0, y: 0, z: 0.0033646908, w: 0.99999434}
+  - name: LegUpperBone_R
+    rotation: {x: 0, y: 0, z: 0.99254346, w: -0.12189118}
+  - name: LegLowerBone_R
+    rotation: {x: 0, y: 0, z: 0.0035196787, w: -0.9999938}
+  - name: HeadBone
+    rotation: {x: 0, y: 0, z: 0.16762796, w: -0.98585033}
+  positions:
+  - name: BackBone
+    position: {x: 0, y: 0, z: 0}
+  - name: ArmUpperBone_L
+    position: {x: -0.93, y: 3.68, z: 0}
+  - name: ArmLowerBone_L
+    position: {x: -0.0000004172325, y: 3.1849022, z: 0}
+  - name: ArmUpperBone_R
+    position: {x: 0.77, y: 3.44, z: 0}
+  - name: ArmLowerBone_R
+    position: {x: -0.00000005960465, y: 2.516573, z: 0}
+  - name: LegUpperBone_L
+    position: {x: -0.82, y: 0.59, z: 0}
+  - name: LegLowerBone_L
+    position: {x: -0.00000011920929, y: 2.4392376, z: 0}
+  - name: LegUpperBone_R
+    position: {x: 0.76, y: 0.44, z: 0}
+  - name: LegLowerBone_R
+    position: {x: 0, y: 2.439504, z: 0}
+  - name: HeadBone
+    position: {x: -0.000000059604645, y: 4.7233477, z: 0}
+  controlPoints: []
+  targets:
+  - name: ArmUpperBone_L
+    position: {x: -5.54, y: 0.04, z: 0}
+  - name: ArmLowerBone_L
+    position: {x: -0.4, y: -0.67, z: 0}
+  - name: ArmUpperBone_R
+    position: {x: -0.68, y: 0.33, z: 0}
+  - name: ArmLowerBone_R
+    position: {x: 3.92, y: -1.03, z: 0}
+  - name: LegUpperBone_L
+    position: {x: -2.1563811, y: -1.3894104, z: 0}
+  - name: LegLowerBone_L
+    position: {x: -0.83, y: -6.27, z: 0}
+  - name: LegUpperBone_R
+    position: {x: 1.9560494, y: -1.7372309, z: 0}
+  - name: LegLowerBone_R
+    position: {x: 2.02, y: -6.04, z: 0}
+  - name: HeadBone
+    position: {x: 1.27, y: 7.24, z: 0}
